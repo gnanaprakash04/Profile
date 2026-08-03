@@ -6,19 +6,19 @@ body{
 
 .hero{
 
-    text-align:center;
+    background:linear-gradient(135deg,#2563EB,#1D4ED8);
 
-    padding:60px;
+    color:white;
 
-    background:white;
+    border-radius:20px;
 
-    width:70%;
+    padding:70px;
+
+    width:80%;
 
     margin:50px auto;
 
-    border-radius:15px;
-
-    box-shadow:0px 5px 20px rgba(0,0,0,0.15);
+    text-align:center;
 
 }
 
