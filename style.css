@@ -11,7 +11,7 @@
   --green-dark:#1B4332;
   --green:#2E7D32;
   --green-deep:#1B5E20;
-  --bg:#11ef3d;
+  --bg:#EAF6EC;
   --surface:#ffffff;
   --gold:#D4A017;
   --text:#3F4A44;
@@ -30,6 +30,16 @@
 *{margin:0;padding:0;box-sizing:border-box}
 
 html{scroll-behavior:smooth}
+
+/* Custom pen cursor — fits the "technical writer" identity better than a
+   plain arrow. Hotspot sits at the nib tip. Applied everywhere, including
+   links/buttons/summary, so it doesn't fall back to the default pointer. */
+html,body{
+  cursor:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8bGluZSB4MT0iMjciIHkxPSI1IiB4Mj0iMTAiIHkyPSIyMiIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSIyNyIgeTE9IjUiIHgyPSIxMCIgeTI9IjIyIiBzdHJva2U9IiMxQjQzMzIiIHN0cm9rZS13aWR0aD0iNC4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cG9seWdvbiBwb2ludHM9IjEwLDIyIDE1LDIxLjUgNiwzMSA0LDI5IiBmaWxsPSIjRDRBMDE3IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K") 4 29, auto;
+}
+a,button,summary,label,.hero a,.btn,nav a{
+  cursor:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8bGluZSB4MT0iMjciIHkxPSI1IiB4Mj0iMTAiIHkyPSIyMiIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSIyNyIgeTE9IjUiIHgyPSIxMCIgeTI9IjIyIiBzdHJva2U9IiMxQjQzMzIiIHN0cm9rZS13aWR0aD0iNC4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cG9seWdvbiBwb2ludHM9IjEwLDIyIDE1LDIxLjUgNiwzMSA0LDI5IiBmaWxsPSIjRDRBMDE3IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K") 4 29, pointer;
+}
 
 body{
   font-family:var(--font-body);
@@ -172,7 +182,7 @@ section > h2::after{
 .reveal.in-view{opacity:1;transform:translateY(0)}
 
 /* ---------- Cards --------------------------------------------------------- */
-.skill-card,.project-card,.award-card,.contact-card,.stat-card{
+.skill-card,.project-card,.award-card,.contact-card{
   width:300px;padding:26px;text-align:center;
   transition:transform .3s var(--ease), box-shadow .3s var(--ease);
 }
@@ -182,7 +192,7 @@ section > h2::after{
 .experience-card{padding:0;transition:box-shadow .3s var(--ease)}
 
 .skill-card:hover,.experience-card:hover,.project-card:hover,.award-card:hover,
-.education-card:hover,.contact-card:hover,.stat-card:hover{
+.education-card:hover,.contact-card:hover{
   transform:translateY(-8px);
   box-shadow:var(--shadow-lg);
 }
@@ -195,11 +205,39 @@ section > h2::after{
 ul{padding-left:20px}
 li{margin-bottom:10px}
 
-/* ---------- Stats (count-up target) --------------------------------------- */
-.stat-card h2{
-  font-size:2.6rem;color:var(--green);font-variant-numeric:tabular-nums;
+/* ---------- Stats — one row of numbered blocks (count-up target) ----------- */
+.stats{
+  flex-wrap:nowrap;
+  counter-reset:stat-index;
+  gap:18px;
 }
-.stat-card p{color:var(--text-muted);font-weight:600;margin-top:4px}
+.stat-card{
+  background:var(--surface);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  flex:1 1 0;
+  min-width:0;
+  padding:26px 16px 22px;
+  text-align:center;
+  position:relative;
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.stat-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+.stat-card::before{
+  counter-increment:stat-index;
+  content:counter(stat-index,decimal-leading-zero);
+  position:absolute;top:12px;left:14px;
+  font-size:.7rem;font-weight:700;letter-spacing:.05em;
+  color:var(--gold);
+  background:var(--bg);
+  border-radius:6px;
+  padding:2px 7px;
+}
+.stat-card h2{
+  font-size:2.4rem;color:var(--green);font-variant-numeric:tabular-nums;
+  margin-top:8px;
+}
+.stat-card p{color:var(--text-muted);font-weight:600;margin-top:4px;font-size:.92rem}
 
 /* ---------- Experience accordion ------------------------------------------ */
 .experience-card summary{
@@ -228,8 +266,22 @@ li{margin-bottom:10px}
 .experience-card li{margin-bottom:12px;line-height:1.8}
 
 /* ---------- Contact -------------------------------------------------------- */
-.contact-card a{color:var(--green);text-decoration:none;font-weight:600}
-.contact-card a:hover{text-decoration:underline}
+.contact>p{
+  text-align:center;
+  font-family:var(--font-body);
+  font-size:1.05rem;
+  color:var(--text-muted);
+  max-width:56ch;
+  margin:0 auto 38px;
+  line-height:1.6;
+}
+.contact-card p{font-size:.98rem}
+.contact-card a{
+  color:var(--green);text-decoration:none;font-weight:600;
+  font-size:1.02rem;letter-spacing:.01em;
+  transition:color .2s var(--ease);
+}
+.contact-card a:hover{color:var(--green-deep);text-decoration:underline}
 
 /* ---------- Footer ---------------------------------------------------------- */
 footer{
@@ -248,5 +300,7 @@ footer p{color:#D7E4DB;font-size:.92rem}
   .hero h1{font-size:2rem}
   .hero h2{font-size:1.05rem}
   .hero img{width:150px;height:150px}
-  .skill-card,.experience-card,.project-card,.award-card,.education-card,.contact-card,.stat-card{width:100%}
+  .skill-card,.experience-card,.project-card,.award-card,.education-card,.contact-card{width:100%}
+  .stats{flex-wrap:wrap}
+  .stat-card{flex:1 1 calc(50% - 18px)}
 }
