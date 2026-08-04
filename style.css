@@ -1,17 +1,18 @@
 /* =========================================================================
    Gnana Prakash — Technical Writer Portfolio
-   Refined theme: same green/gold brand, tighter type scale, consistent
-   spacing, scroll-reveal + count-up animations (see reveal.js).
+   v3: documentation-themed backdrop (drafting-grid texture + doc-style
+   section numbering), a distinct entrance animation per section, and a
+   tabbed "skills reference" panel in place of the three static cards.
    ========================================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
 
 /* ---------- Design tokens ---------------------------------------------- */
 :root{
   --green-dark:#1B4332;
   --green:#2E7D32;
   --green-deep:#1B5E20;
-  --bg:#F6FBF7;
+  --bg:#F3F7F4;
   --surface:#ffffff;
   --gold:#D4A017;
   --text:#3F4A44;
@@ -19,6 +20,7 @@
 
   --font-head:'Poppins', Arial, sans-serif;
   --font-body:'Inter', Arial, sans-serif;
+  --font-mono:'IBM Plex Mono', 'Courier New', monospace;
 
   --radius:16px;
   --shadow-sm:0 4px 14px rgba(27,67,50,.06);
@@ -31,17 +33,24 @@
 
 html{scroll-behavior:smooth}
 
+/* Drafting-grid backdrop: faint dot grid + soft directional wash, evoking
+   a technical schematic / structured-doc canvas rather than plain paper. */
 body{
   font-family:var(--font-body);
-  background:var(--bg);
   color:var(--text);
   line-height:1.7;
   -webkit-font-smoothing:antialiased;
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(rgba(27,67,50,.09) 1px, transparent 1px),
+    linear-gradient(180deg, #EEF5F0 0%, #F3F7F4 40%, #F6FAF7 100%);
+  background-size:26px 26px, 100% 100%;
+  background-attachment:fixed, fixed;
 }
 
 h1,h2,h3,h4{font-family:var(--font-head)}
 
-a:focus-visible,summary:focus-visible,button:focus-visible{
+a:focus-visible,summary:focus-visible,button:focus-visible,label:focus-visible{
   outline:2px solid var(--gold);
   outline-offset:3px;
 }
@@ -61,31 +70,21 @@ nav{
   position:sticky;top:0;z-index:1000;
   transition:box-shadow .3s var(--ease), padding .3s var(--ease);
 }
-nav.is-scrolled{
-  box-shadow:var(--shadow-md);
-  padding:12px 60px;
-}
+nav.is-scrolled{box-shadow:var(--shadow-md);padding:12px 60px}
 .logo{font-family:var(--font-head);font-size:26px;font-weight:700;color:var(--green-dark)}
 nav ul{display:flex;list-style:none;gap:30px}
 nav a{
-  position:relative;
-  text-decoration:none;color:var(--green-dark);font-weight:600;
-  padding-bottom:4px;
+  position:relative;text-decoration:none;color:var(--green-dark);font-weight:600;padding-bottom:4px;
 }
 nav a::after{
-  content:'';
-  position:absolute;left:0;bottom:0;
-  width:100%;height:2px;
-  background:var(--gold);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform .25s var(--ease);
+  content:'';position:absolute;left:0;bottom:0;width:100%;height:2px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease);
 }
 nav a:hover{color:var(--green)}
 nav a:hover::after{transform:scaleX(1)}
 
 /* ---------- Shared surfaces --------------------------------------------- */
-.hero,.about,.skill-card,.experience-card,.project-card,.award-card,
+.hero,.about,.skills-panel,.experience-card,.project-card,.award-card,
 .education-card,.contact-card,.stat-card{
   background:var(--surface);
   border-radius:var(--radius);
@@ -108,28 +107,39 @@ nav a:hover::after{transform:scaleX(1)}
   animation:fade-up .6s var(--ease) forwards;
   animation-delay:.1s;
 }
+/* Name reveals with a left-to-right wipe, like a line being underlined
+   as it's written — independent of character count, so it stays robust
+   if the name/text ever changes. */
 .hero h1{
   color:var(--green-dark);margin:22px 0 8px;font-size:2.6rem;font-weight:700;
-  opacity:0;animation:fade-up .6s var(--ease) forwards;animation-delay:.2s;
+  clip-path:inset(0 100% 0 0);
+  animation:wipe-reveal .8s var(--ease) forwards;
+  animation-delay:.15s;
 }
+@keyframes wipe-reveal{ to{ clip-path:inset(0 0 0 0); } }
+
 .hero h2{
-  color:var(--green);margin-bottom:18px;font-size:1.05rem;font-weight:600;
+  color:var(--green);margin-bottom:10px;font-size:1.05rem;font-weight:600;
   max-width:56ch;margin-left:auto;margin-right:auto;
-  opacity:0;animation:fade-up .6s var(--ease) forwards;animation-delay:.3s;
-}
-.hero p{
-  font-size:1.05rem;margin-bottom:26px;color:var(--text-muted);
-  max-width:70ch;margin-left:auto;margin-right:auto;
+  position:relative;display:inline-block;
   opacity:0;animation:fade-up .6s var(--ease) forwards;animation-delay:.4s;
 }
-.hero a{
-  opacity:0;animation:fade-up .6s var(--ease) forwards;animation-delay:.5s;
+/* underline draws in beneath the tagline, like a highlighter stroke */
+.hero h2::after{
+  content:'';position:absolute;left:0;bottom:-6px;width:100%;height:2px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;
+  animation:underline-draw .6s var(--ease) forwards;animation-delay:.75s;
 }
+@keyframes underline-draw{ to{ transform:scaleX(1); } }
 
-@keyframes fade-up{
-  from{opacity:0;transform:translateY(14px)}
-  to{opacity:1;transform:translateY(0)}
+.hero p{
+  font-size:1.05rem;margin:20px auto 26px;color:var(--text-muted);
+  max-width:70ch;
+  opacity:0;animation:fade-up .6s var(--ease) forwards;animation-delay:.55s;
 }
+.hero a{opacity:0;animation:fade-up .6s var(--ease) forwards;animation-delay:.7s}
+
+@keyframes fade-up{ from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
 
 .hero a,.btn{
   display:inline-block;background:var(--green);color:#fff;text-decoration:none;
@@ -137,104 +147,228 @@ nav a:hover::after{transform:scaleX(1)}
   transition:background .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
   box-shadow:var(--shadow-sm);
 }
-.hero a:hover,.btn:hover{
-  background:var(--green-deep);
-  transform:translateY(-3px);
-  box-shadow:var(--shadow-md);
-}
+.hero a:hover,.btn:hover{background:var(--green-deep);transform:translateY(-3px);box-shadow:var(--shadow-md)}
 
 /* ---------- Layout helpers ------------------------------------------------ */
-.stats,.skills-container,.project-container,.award-container,
-.education-container,.contact-container{
+.stats,.project-container,.award-container,.education-container,.contact-container{
   display:flex;justify-content:center;gap:30px;flex-wrap:wrap;
 }
-.stats,.skills,.experience,.projects,.awards,.education,.contact{
-  width:80%;margin:80px auto;
-}
+.stats,.skills,.experience,.projects,.awards,.education,.contact{width:80%;margin:80px auto}
 .about{width:70%;margin:80px auto;padding:44px}
 
-h2{text-align:center;color:var(--green-dark);margin-bottom:14px;font-size:1.9rem}
-section > h2::after{
-  content:'';
+h2{text-align:center;color:var(--green-dark);margin-bottom:6px;font-size:1.9rem}
+section>h2::after{
+  content:'';display:block;width:56px;height:3px;background:var(--gold);
+  margin:14px auto 34px;border-radius:2px;
+}
+
+/* Documentation-style section numbering — auto-generated so no HTML edits
+   are needed if sections are reordered. Reads like a doc/chapter ID,
+   nodding to structured-authoring (DITA) numbering conventions. */
+body{counter-reset:doc-section}
+.about h2::before,.skills h2::before,.experience h2::before,
+.projects h2::before,.awards h2::before,.education h2::before,.contact h2::before{
+  counter-increment:doc-section;
+  content:"DOC-" counter(doc-section,decimal-leading-zero);
   display:block;
-  width:56px;height:3px;
-  background:var(--gold);
-  margin:14px auto 34px;
-  border-radius:2px;
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  letter-spacing:.16em;
+  font-weight:600;
+  color:var(--gold);
+  margin-bottom:8px;
 }
 
 /* ---------- Reveal-on-scroll (paired with reveal.js) ---------------------- */
-.reveal{
-  opacity:0;
-  transform:translateY(22px);
-  transition:opacity .6s var(--ease), transform .6s var(--ease);
-}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease), transform .6s var(--ease)}
 .reveal.in-view{opacity:1;transform:translateY(0)}
 
-/* ---------- Cards --------------------------------------------------------- */
-.skill-card,.project-card,.award-card,.contact-card,.stat-card{
-  width:300px;padding:26px;text-align:center;
-  transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+/* About: paragraphs slide in from the left, staggered, like lines being
+   typed down a page. */
+.about p{
+  opacity:0;transform:translateX(-18px);
+  transition:opacity .55s var(--ease), transform .55s var(--ease);
 }
-.education-card{width:400px;padding:30px;transition:transform .3s var(--ease), box-shadow .3s var(--ease)}
+.about.in-view p{opacity:1;transform:translateX(0)}
+.about p:nth-of-type(1){transition-delay:.05s}
+.about p:nth-of-type(2){transition-delay:.15s}
+.about p:nth-of-type(3){transition-delay:.25s}
+.about p:nth-of-type(4){transition-delay:.35s}
 
-.experience-container{display:flex;flex-direction:column;gap:22px}
-.experience-card{padding:0;transition:box-shadow .3s var(--ease)}
-
-.skill-card:hover,.experience-card:hover,.project-card:hover,.award-card:hover,
-.education-card:hover,.contact-card:hover,.stat-card:hover{
-  transform:translateY(-8px);
-  box-shadow:var(--shadow-lg);
+/* Stats: cards pop in with a slight scale, staggered left to right. */
+.stat-card{
+  width:220px;padding:26px;text-align:center;
+  opacity:0;transform:scale(.85);
+  transition:opacity .45s var(--ease), transform .45s var(--ease), box-shadow .3s var(--ease);
 }
-
-.skill-card h3,.experience-card h3,.project-card h3,.award-card h3,.education-card h3{
-  color:var(--green);margin-bottom:14px;
-}
-
-.date{color:var(--text-muted);font-style:italic;margin-bottom:18px;font-size:.92rem}
-ul{padding-left:20px}
-li{margin-bottom:10px}
-
-/* ---------- Stats (count-up target) --------------------------------------- */
-.stat-card h2{
-  font-size:2.6rem;color:var(--green);font-variant-numeric:tabular-nums;
-}
+.stats.in-view .stat-card{opacity:1;transform:scale(1)}
+.stats .stat-card:nth-child(1){transition-delay:.05s}
+.stats .stat-card:nth-child(2){transition-delay:.15s}
+.stats .stat-card:nth-child(3){transition-delay:.25s}
+.stats .stat-card:nth-child(4){transition-delay:.35s}
+.stat-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:var(--shadow-lg)}
+.stat-card h2{font-size:2.6rem;color:var(--green);font-variant-numeric:tabular-nums;margin-bottom:0}
+.stat-card h2::before{content:none}
 .stat-card p{color:var(--text-muted);font-weight:600;margin-top:4px}
 
-/* ---------- Experience accordion ------------------------------------------ */
+/* ---------- Skills — tabbed "reference panel" (CSS-only, no JS) ----------- */
+/* Replaces the three static cards with a documentation-style tab set:
+   click a category to switch the list, panel fades/slides in and its
+   items reveal in sequence — a nod to how she actually organizes
+   reference content for readers. */
+.skills-panel{
+  max-width:640px;margin:0 auto;padding:10px;overflow:hidden;
+}
+.skills-tab-input{position:absolute;opacity:0;pointer-events:none}
+
+.skills-tabs{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+  padding:14px;border-bottom:1px solid #E4ECE6;
+}
+.skills-tabs label{
+  font-family:var(--font-mono);font-size:.85rem;font-weight:600;
+  color:var(--text-muted);
+  padding:10px 18px;border-radius:10px;cursor:pointer;
+  transition:background .2s var(--ease), color .2s var(--ease);
+}
+.skills-tabs label:hover{background:var(--bg);color:var(--green-dark)}
+
+.skills-panels{position:relative;padding:30px 36px 8px}
+.skills-list{list-style:none;display:none}
+.skills-list li{
+  opacity:0;transform:translateY(10px);
+  animation:list-item-in .4s var(--ease) forwards;
+  animation-play-state:paused;
+  padding:10px 0;
+  border-bottom:1px dashed #E4ECE6;
+  display:flex;align-items:center;gap:10px;
+}
+.skills.in-view .skills-list li{animation-play-state:running}
+.skills-list li:last-child{border-bottom:none}
+.skills-list li::before{
+  content:'✓';
+  font-family:var(--font-mono);
+  color:var(--green);font-weight:600;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;font-size:.75rem;
+  flex-shrink:0;
+}
+.skills-list li:nth-child(1){animation-delay:.05s}
+.skills-list li:nth-child(2){animation-delay:.12s}
+.skills-list li:nth-child(3){animation-delay:.19s}
+.skills-list li:nth-child(4){animation-delay:.26s}
+.skills-list li:nth-child(5){animation-delay:.33s}
+.skills-list li:nth-child(6){animation-delay:.40s}
+@keyframes list-item-in{ to{opacity:1;transform:translateY(0)} }
+
+#tab-doc:checked ~ .skills-tabs label[for="tab-doc"],
+#tab-authoring:checked ~ .skills-tabs label[for="tab-authoring"],
+#tab-tools:checked ~ .skills-tabs label[for="tab-tools"]{
+  background:var(--green);color:#fff;
+}
+#tab-doc:checked ~ .skills-panels #panel-doc,
+#tab-authoring:checked ~ .skills-panels #panel-authoring,
+#tab-tools:checked ~ .skills-panels #panel-tools{
+  display:block;
+  animation:panel-in .4s var(--ease);
+}
+@keyframes panel-in{ from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+/* ---------- Experience — alternating left/right slide-in ------------------ */
+.experience-container{display:flex;flex-direction:column;gap:22px}
+.experience-card{
+  padding:0;
+  opacity:0;transform:translateX(-30px);
+  transition:opacity .55s var(--ease), transform .55s var(--ease), box-shadow .3s var(--ease);
+}
+.experience.in-view .experience-card{opacity:1;transform:translateX(0)}
+.experience-container .experience-card:nth-child(even){transform:translateX(30px)}
+.experience.in-view .experience-card:nth-child(even){transform:translateX(0)}
+.experience-container .experience-card:nth-child(1){transition-delay:.05s}
+.experience-container .experience-card:nth-child(2){transition-delay:.12s}
+.experience-container .experience-card:nth-child(3){transition-delay:.19s}
+.experience-container .experience-card:nth-child(4){transition-delay:.26s}
+.experience-container .experience-card:nth-child(5){transition-delay:.33s}
+.experience-card:hover{box-shadow:var(--shadow-lg)}
+
 .experience-card summary{
-  display:flex;align-items:center;gap:20px;
-  padding:22px 30px;cursor:pointer;list-style:none;
-  transition:background .25s var(--ease);
+  display:flex;align-items:center;gap:20px;padding:22px 30px;cursor:pointer;
+  list-style:none;transition:background .25s var(--ease);
 }
 .experience-card summary:hover{background:var(--bg)}
 .experience-card summary::-webkit-details-marker{display:none}
-
 .company-logo{width:55px;height:55px;object-fit:contain}
 .company-info{flex:1}
 .company-info h4{color:var(--green-dark);margin-bottom:4px;font-size:1.05rem}
 .company-info p{color:var(--text-muted);font-weight:600}
-
 .experience-card summary::after{
-  content:"❯";font-size:22px;color:var(--gold);
-  transition:transform .35s var(--ease);
+  content:"❯";font-size:22px;color:var(--gold);transition:transform .35s var(--ease);
 }
 .experience-card[open] summary::after{transform:rotate(90deg)}
-
-.experience-card ul{
-  padding:6px 40px 30px 95px;
-  animation:fade-up .35s var(--ease) forwards;
-}
+.experience-card ul{padding:6px 40px 30px 95px;animation:fade-up .35s var(--ease) forwards}
 .experience-card li{margin-bottom:12px;line-height:1.8}
+.date{color:var(--text-muted);font-style:italic;margin-bottom:18px;font-size:.92rem}
+ul{padding-left:20px}
+li{margin-bottom:10px}
 
-/* ---------- Contact -------------------------------------------------------- */
+/* ---------- Projects — scale/pop in ---------------------------------------- */
+.project-card{
+  width:300px;padding:26px;text-align:center;
+  opacity:0;transform:scale(.9);
+  transition:opacity .5s var(--ease), transform .5s var(--ease), box-shadow .3s var(--ease);
+}
+.projects.in-view .project-card{opacity:1;transform:scale(1)}
+.project-container .project-card:nth-child(1){transition-delay:.05s}
+.project-container .project-card:nth-child(2){transition-delay:.18s}
+.project-container .project-card:nth-child(3){transition-delay:.31s}
+.project-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:var(--shadow-lg)}
+.project-card h3{color:var(--green);margin-bottom:14px}
+
+/* ---------- Awards — gentle tilt-in, like a plaque being hung -------------- */
+.award-card{
+  width:300px;padding:26px;text-align:center;
+  opacity:0;transform:rotate(-4deg) translateY(14px);
+  transition:opacity .55s var(--ease), transform .55s var(--ease), box-shadow .3s var(--ease);
+}
+.awards.in-view .award-card{opacity:1;transform:rotate(0) translateY(0)}
+.award-container .award-card:nth-child(1){transition-delay:.05s}
+.award-container .award-card:nth-child(2){transition-delay:.18s}
+.award-container .award-card:nth-child(3){transition-delay:.31s}
+.award-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+.award-card h3{color:var(--green);margin-bottom:14px}
+
+/* ---------- Education — rise up -------------------------------------------- */
+.education-card{
+  width:400px;padding:30px;
+  opacity:0;transform:translateY(24px);
+  transition:opacity .55s var(--ease), transform .55s var(--ease), box-shadow .3s var(--ease);
+}
+.education.in-view .education-card{opacity:1;transform:translateY(0)}
+.education-container .education-card:nth-child(1){transition-delay:.05s}
+.education-container .education-card:nth-child(2){transition-delay:.18s}
+.education-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+.education-card h3{color:var(--green);margin-bottom:14px}
+
+/* ---------- Contact — fade with a soft bounce ------------------------------ */
+.contact-card{
+  width:300px;padding:26px;text-align:center;
+  opacity:0;transform:translateY(18px);
+  transition:opacity .5s cubic-bezier(.34,1.56,.64,1), transform .5s cubic-bezier(.34,1.56,.64,1), box-shadow .3s var(--ease);
+}
+.contact.in-view .contact-card{opacity:1;transform:translateY(0)}
+.contact-container .contact-card:nth-child(1){transition-delay:.04s}
+.contact-container .contact-card:nth-child(2){transition-delay:.10s}
+.contact-container .contact-card:nth-child(3){transition-delay:.16s}
+.contact-container .contact-card:nth-child(4){transition-delay:.22s}
+.contact-container .contact-card:nth-child(5){transition-delay:.28s}
+.contact-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+.contact-card h3{color:var(--green);margin-bottom:14px}
 .contact-card a{color:var(--green);text-decoration:none;font-weight:600}
 .contact-card a:hover{text-decoration:underline}
 
 /* ---------- Footer ---------------------------------------------------------- */
-footer{
-  background:var(--green-dark);color:#fff;text-align:center;padding:38px 20px;margin-top:90px;
-}
+footer{background:var(--green-dark);color:#fff;text-align:center;padding:38px 20px;margin-top:90px}
 footer h3{font-family:var(--font-head);margin-bottom:6px}
 footer p{color:#D7E4DB;font-size:.92rem}
 
@@ -248,5 +382,7 @@ footer p{color:#D7E4DB;font-size:.92rem}
   .hero h1{font-size:2rem}
   .hero h2{font-size:1.05rem}
   .hero img{width:150px;height:150px}
-  .skill-card,.experience-card,.project-card,.award-card,.education-card,.contact-card,.stat-card{width:100%}
+  .stat-card,.project-card,.award-card,.education-card,.contact-card{width:100%}
+  .skills-panels{padding:24px 18px 8px}
+  .experience-container .experience-card:nth-child(even){transform:translateX(-30px)}
 }
