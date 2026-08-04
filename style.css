@@ -41,4 +41,84 @@ nav ul{flex-direction:column;gap:15px;margin-top:20px}
 .hero h2{font-size:22px}
 .hero img{width:160px;height:160px}
 .skill-card,.experience-card,.project-card,.award-card,.education-card,.contact-card,.stat-card{width:100%}
+}/* EXPERIENCE ACCORDION */
+
+.experience-container{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.experience-card{
+
+    background:white;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+    overflow:hidden;
+
+}
+
+.experience-card summary{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    padding:20px 30px;
+
+    cursor:pointer;
+
+    list-style:none;
+
+    font-weight:bold;
+
+}
+
+.experience-card summary::-webkit-details-marker{
+
+    display:none;
+
+}
+
+.experience-card summary::after{
+
+    content:"+";
+
+    margin-left:auto;
+
+    font-size:28px;
+
+    color:#2E7D32;
+
+    font-weight:bold;
+
+}
+
+.experience-card[open] summary::after{
+
+    content:"−";
+
+}
+
+.experience-card ul{
+
+    padding:0 40px 30px 70px;
+
+}
+
+.experience-card li{
+
+    margin-bottom:12px;
+
+    line-height:1.7;
+
 }
