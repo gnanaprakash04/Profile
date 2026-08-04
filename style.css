@@ -41,45 +41,49 @@ nav ul{flex-direction:column;gap:15px;margin-top:20px}
 .hero h2{font-size:22px}
 .hero img{width:160px;height:160px}
 .skill-card,.experience-card,.project-card,.award-card,.education-card,.contact-card,.stat-card{width:100%}
-}/* EXPERIENCE ACCORDION */
+}/* ===========================
+   EXPERIENCE ACCORDION
+=========================== */
 
 .experience-container{
 
     display:flex;
-
     flex-direction:column;
-
     gap:20px;
 
 }
 
 .experience-card{
 
-    background:white;
-
+    background:#fff;
     border-radius:15px;
-
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
     overflow:hidden;
+    transition:.3s;
+
+}
+
+.experience-card:hover{
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
 
 }
 
 .experience-card summary{
 
     display:flex;
-
     align-items:center;
-
     gap:20px;
-
-    padding:20px 30px;
-
+    padding:22px 30px;
     cursor:pointer;
-
     list-style:none;
+    transition:.3s;
 
-    font-weight:bold;
+}
+
+.experience-card summary:hover{
+
+    background:#F6FBF7;
 
 }
 
@@ -89,36 +93,75 @@ nav ul{flex-direction:column;gap:15px;margin-top:20px}
 
 }
 
-.experience-card summary::after{
+/* Company Logo */
 
-    content:"+";
+.company-logo{
 
-    margin-left:auto;
-
-    font-size:28px;
-
-    color:#2E7D32;
-
-    font-weight:bold;
+    width:55px;
+    height:55px;
+    object-fit:contain;
 
 }
+
+/* Text */
+
+.company-info{
+
+    flex:1;
+
+}
+
+.company-info h3{
+
+    color:#1B4332;
+    margin-bottom:5px;
+
+}
+
+.company-info p{
+
+    color:#666;
+    font-weight:600;
+
+}
+
+.company-info span{
+
+    color:#888;
+    font-size:14px;
+
+}
+
+/* Arrow */
+
+.experience-card summary::after{
+
+    content:"❯";
+    font-size:24px;
+    color:#2E7D32;
+    transition:.35s ease;
+
+}
+
+/* Rotate Arrow */
 
 .experience-card[open] summary::after{
 
-    content:"−";
+    transform:rotate(90deg);
 
 }
 
+/* Content */
+
 .experience-card ul{
 
-    padding:0 40px 30px 70px;
+    padding:10px 40px 30px 95px;
 
 }
 
 .experience-card li{
 
     margin-bottom:12px;
-
-    line-height:1.7;
+    line-height:1.8;
 
 }
