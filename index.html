@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gnana Prakash Portfolio</title>
 
     <link rel="stylesheet" href="style.css">
@@ -11,11 +13,20 @@
 
     <!-- Navigation -->
     <nav>
-        ...
+        <div class="logo">Gnana Prakash</div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Work Samples</a></li>
+            <li><a href="#awards">Awards</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
 
     <!-- Hero Section -->
-     
+
     <div class="hero">
 
         <img src="images/profile.JPG" alt="Profile Photo">
@@ -33,33 +44,33 @@
 </a>
 
     </div>
-    
-    <section class="stats">
+
+    <section class="stats reveal">
 
     <div class="stat-card">
-        <h2>14+</h2>
+        <h2 data-count="14" data-suffix="+">0</h2>
         <p>Years Experience</p>
     </div>
 
     <div class="stat-card">
-        <h2>200+</h2>
+        <h2 data-count="200" data-suffix="+">0</h2>
         <p>Documents Delivered</p>
     </div>
 
     <div class="stat-card">
-        <h2>20+</h2>
+        <h2 data-count="20" data-suffix="+">0</h2>
         <p>Products Documented</p>
     </div>
 
     <div class="stat-card">
-        <h2>3</h2>
+        <h2 data-count="3" data-suffix="">0</h2>
         <p>Industry Awards</p>
     </div>
 
 </section>
 
     <!-- About Me Section -->
-    <section class="about">
+    <section class="about reveal" id="about">
 
         <h2>About Me</h2>
 
@@ -86,7 +97,7 @@ Support teams to deliver clear, accurate, and user-focused documentation.
 </p>
 
     </section>
-<section class="skills">
+<section class="skills reveal" id="skills">
 
     <h2>Technical Skills</h2>
 
@@ -140,7 +151,7 @@ Support teams to deliver clear, accurate, and user-focused documentation.
     </div>
 
 </section>
-<section class="experience" id="experience">
+<section class="experience reveal" id="experience">
 
     <h2>Professional Experience</h2>
 
@@ -253,7 +264,7 @@ accurate documentation.</li>
     </div>
 
 </section>
-<section class="projects" id="projects">
+<section class="projects reveal" id="projects">
 
 <h2>Work Samples</h2>
 
@@ -309,7 +320,7 @@ This document provides information about Fiber it is a scalable passive optical 
 </div>
 
 </section>
-<section class="awards" id="awards">
+<section class="awards reveal" id="awards">
 
 <h2>Achievements & Awards</h2>
 
@@ -348,7 +359,7 @@ This document provides information about Fiber it is a scalable passive optical 
 </div>
 
 </section>
-<section class="education" id="education">
+<section class="education reveal" id="education">
 
 <h2>Education & Certifications</h2>
 
@@ -379,7 +390,7 @@ This document provides information about Fiber it is a scalable passive optical 
 </div>
 
 </section>
-<section class="contact" id="contact">
+<section class="contact reveal" id="contact">
 
     <h2>Contact Me</h2>
 
@@ -458,5 +469,7 @@ This document provides information about Fiber it is a scalable passive optical 
     <p>© 2026 All Rights Reserved</p>
 
 </footer>
+
+<script src="reveal.js"></script>
 </body>
 </html>
