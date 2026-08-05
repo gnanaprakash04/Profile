@@ -95,7 +95,7 @@ nav a:hover{color:var(--green)}
 nav a:hover::after{transform:scaleX(1)}
 
 /* ---------- Shared surfaces --------------------------------------------- */
-.hero,.about,.skill-card,.experience-card,.project-card,.award-card,
+.about,.skill-card,.experience-card,.project-card,.award-card,
 .education-card,.contact-card,.stat-card{
   background:var(--surface);
   border-radius:var(--radius);
@@ -104,39 +104,84 @@ nav a:hover::after{transform:scaleX(1)}
 
 /* ---------- Hero --------------------------------------------------------- */
 .hero{
-  width:80%;margin:60px auto;padding:60px;
-  display:flex;align-items:center;gap:50px;text-align:left;
-  border-top:6px solid var(--green);
+  width:88%;max-width:1180px;margin:70px auto;padding:0;
+  display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:50px;
   position:relative;
   opacity:0;
   animation:fade-up .7s var(--ease) forwards;
 }
-.hero-content{flex:1;min-width:0}
-.hero img{
-  width:180px;height:180px;border-radius:50%;object-fit:cover;
-  border:5px solid var(--gold);
-  box-shadow:var(--shadow-md);
-  flex-shrink:0;
-  opacity:0;
-  animation:fade-up .6s var(--ease) forwards;
-  animation-delay:.1s;
+.hero-content{text-align:left}
+
+.hero-eyebrow{
+  font-family:var(--font-head);font-weight:600;font-size:.85rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:10px;
+  opacity:0;animation:fade-up .6s var(--ease) forwards;animation-delay:.1s;
 }
+
+/* Image sits free of any card — an organic blob crop with a soft color
+   shape behind it, plus a floating stat badge overlapping the corner. */
+.hero-image{
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  min-height:340px;
+}
+.hero-image::before{
+  content:'';
+  position:absolute;
+  width:88%;height:92%;
+  background:linear-gradient(135deg,var(--green) 0%, var(--gold) 100%);
+  opacity:.16;
+  border-radius:41% 59% 63% 37% / 44% 42% 58% 56%;
+  animation:blob-float 9s ease-in-out infinite;
+  z-index:0;
+}
+.hero-image img{
+  position:relative;z-index:1;
+  width:78%;max-width:340px;
+  aspect-ratio:1/1.08;
+  object-fit:cover;
+  border-radius:41% 59% 63% 37% / 44% 42% 58% 56%;
+  box-shadow:var(--shadow-lg);
+  opacity:0;
+  animation:fade-up .6s var(--ease) forwards, blob-float 9s ease-in-out infinite;
+  animation-delay:.15s, 0s;
+}
+@keyframes blob-float{
+  0%,100%{ transform:translate(0,0) rotate(0deg); }
+  50%{ transform:translate(5px,-8px) rotate(2deg); }
+}
+
+.hero-badge{
+  position:absolute;
+  bottom:6%;left:2%;
+  z-index:2;
+  background:var(--surface);
+  padding:14px 20px;
+  border-radius:14px;
+  box-shadow:var(--shadow-md);
+  display:flex;flex-direction:column;align-items:center;line-height:1.1;
+  opacity:0;animation:fade-up .6s var(--ease) forwards;animation-delay:.65s;
+}
+.hero-badge strong{font-family:var(--font-head);font-size:1.6rem;color:var(--green)}
+.hero-badge span{font-size:.72rem;color:var(--text-muted);font-weight:600;margin-top:2px}
+
 .hero h1{
-  color:var(--green-dark);margin:0 0 8px;font-size:2.6rem;font-weight:700;
-  opacity:0;animation:fade-up .6s var(--ease) forwards;animation-delay:.2s;
+  color:var(--green-dark);margin:0 0 8px;font-size:2.9rem;font-weight:700;
+  opacity:0;animation:fade-up .6s var(--ease) forwards;animation-delay:.22s;
 }
 .hero h2{
   color:var(--green);margin-bottom:18px;font-size:1.05rem;font-weight:600;
   max-width:60ch;
-  opacity:0;animation:fade-up .6s var(--ease) forwards;animation-delay:.3s;
+  opacity:0;animation:fade-up .6s var(--ease) forwards;animation-delay:.32s;
 }
 .hero p{
   font-size:1.05rem;margin-bottom:26px;color:var(--text-muted);
-  max-width:70ch;
-  opacity:0;animation:fade-up .6s var(--ease) forwards;animation-delay:.4s;
+  max-width:60ch;
+  opacity:0;animation:fade-up .6s var(--ease) forwards;animation-delay:.42s;
 }
 .hero a{
-  opacity:0;animation:fade-up .6s var(--ease) forwards;animation-delay:.5s;
+  opacity:0;animation:fade-up .6s var(--ease) forwards;animation-delay:.52s;
 }
 
 @keyframes fade-up{
@@ -299,12 +344,14 @@ footer p{color:#D7E4DB;font-size:.92rem}
   nav.is-scrolled{padding:14px 20px}
   nav ul{flex-direction:column;gap:15px;text-align:center}
   .hero,.about,.skills,.experience,.projects,.awards,.education,.contact{width:95%}
-  .hero{padding:40px 20px;flex-direction:column;text-align:center}
+  .hero{width:92%;grid-template-columns:1fr;text-align:center;gap:30px}
   .hero-content{text-align:center}
   .hero h2,.hero p{max-width:none;margin-left:auto;margin-right:auto}
   .hero h1{font-size:2rem}
   .hero h2{font-size:1.05rem}
-  .hero img{width:150px;height:150px}
+  .hero-image{order:-1;min-height:260px}
+  .hero-image img{max-width:220px}
+  .hero-badge{left:50%;transform:translateX(-50%);bottom:-16px}
   .skill-card,.experience-card,.project-card,.award-card,.education-card,.contact-card{width:100%}
   .stats{flex-wrap:wrap}
   .stat-card{flex:1 1 calc(50% - 18px)}
