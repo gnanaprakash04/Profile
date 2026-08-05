@@ -77,6 +77,7 @@
     var typeMeta = {
       pdf: { icon: '📄', label: 'PDF' },
       doc: { icon: '📝', label: 'Doc' },
+      video: { icon: '🎬', label: 'Video' },
       link: { icon: '🔗', label: 'Link' }
     };
 
@@ -84,6 +85,10 @@
       var div = document.createElement('div');
       div.textContent = str;
       return div.innerHTML;
+    }
+
+    function isDirectVideoFile(url) {
+      return /\.(mp4|webm|ogv|mov)$/i.test(url);
     }
 
     function renderKb(items) {
@@ -96,15 +101,29 @@
         var tags = (item.tags || []).map(function (t) {
           return '<li>' + escapeHtml(t) + '</li>';
         }).join('');
+
+        var mediaHtml = '';
+        var linkHtml;
+        if (item.type === 'video' && isDirectVideoFile(item.url)) {
+          // Self-hosted video file — play inline in the card.
+          mediaHtml = '<video class="kb-video" controls preload="metadata" src="' + item.url + '"></video>';
+          linkHtml = '';
+        } else {
+          linkHtml = (
+            '<a class="kb-link" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' +
+              (item.type === 'video' ? '▶ Watch video' : item.type === 'link' ? 'Visit resource' : 'View / Download') +
+            '</a>'
+          );
+        }
+
         return (
           '<article class="kb-card" style="animation-delay:' + (i * 0.05) + 's">' +
             '<span class="kb-type">' + meta.icon + ' ' + meta.label + '</span>' +
             '<h3>' + escapeHtml(item.title) + '</h3>' +
+            mediaHtml +
             '<p>' + escapeHtml(item.description || '') + '</p>' +
             (tags ? '<ul class="kb-tags">' + tags + '</ul>' : '') +
-            '<a class="kb-link" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' +
-              (item.type === 'link' ? 'Visit resource' : 'View / Download') +
-            '</a>' +
+            linkHtml +
           '</article>'
         );
       }).join('');
