@@ -95,7 +95,7 @@ nav a:hover{color:var(--green)}
 nav a:hover::after{transform:scaleX(1)}
 
 /* ---------- Shared surfaces --------------------------------------------- */
-.about,.skill-card,.experience-card,.project-card,.award-card,
+.skill-card,.experience-card,.project-card,.award-card,
 .education-card,.contact-card,.stat-card{
   background:var(--surface);
   border-radius:var(--radius);
@@ -209,7 +209,33 @@ nav a:hover::after{transform:scaleX(1)}
 .stats,.skills,.experience,.projects,.awards,.education,.contact{
   width:80%;margin:80px auto;
 }
-.about{width:70%;margin:80px auto;padding:44px}
+.about{
+  width:70%;margin:80px auto;padding:50px 60px;
+  position:relative;
+  background:transparent;
+}
+/* Hand-drawn pencil frame — two overlapping wobbly strokes, like a sketch
+   redrawn twice, sitting slightly askew for an imperfect, hand-made feel. */
+.sketch-border{
+  position:absolute;
+  inset:-6px;
+  width:calc(100% + 12px);
+  height:calc(100% + 12px);
+  z-index:-1;
+  pointer-events:none;
+  transform:rotate(-0.3deg);
+}
+.sketch-border path{
+  fill:none;
+  stroke:var(--green-dark);
+  stroke-width:1.6;
+  stroke-linecap:round;
+  opacity:.55;
+}
+.sketch-border path:last-child{
+  stroke:var(--gold);
+  opacity:.4;
+}
 
 h2{text-align:center;color:var(--green-dark);margin-bottom:14px;font-size:1.9rem}
 section > h2::after{
@@ -287,7 +313,7 @@ li{margin-bottom:10px}
 }
 .stat-card p{color:var(--text-muted);font-weight:600;margin-top:4px;font-size:.92rem}
 
-/* ---------- Experience accordion ------------------------------------------ */
+/* ---------- Experience — "newspaper clipping" open state ------------------ */
 .experience-card summary{
   display:flex;align-items:center;gap:20px;
   padding:22px 30px;cursor:pointer;list-style:none;
@@ -307,11 +333,58 @@ li{margin-bottom:10px}
 }
 .experience-card[open] summary::after{transform:rotate(90deg)}
 
+/* The "Project:" line + list together read like a clipped newsprint
+   article: warm paper tint, serif headline font, a faint fold shadow,
+   and a small permanent tilt once open — alternating left/right per
+   card so a run of open cards doesn't look mechanically identical. */
+.experience-card[open]{position:relative}
+.experience-card > p,
 .experience-card ul{
-  padding:6px 40px 30px 95px;
-  animation:fade-up .35s var(--ease) forwards;
+  background:#FBF5E8;
+  border:1px solid #E9DFC6;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 6px 14px rgba(27,67,50,.08);
 }
-.experience-card li{margin-bottom:12px;line-height:1.8}
+.experience-card > p{
+  margin:0 24px;
+  padding:16px 20px 4px 20px;
+  font-family:Georgia,'Times New Roman',serif;
+  font-weight:700;
+  font-style:italic;
+  color:var(--green-dark);
+  border-bottom:none;
+  border-radius:8px 8px 0 0;
+  opacity:0;
+  transform:rotate(-2deg) translateY(-8px);
+  animation:paper-unfold .45s var(--ease) forwards;
+}
+.experience-card ul{
+  margin:0 24px 20px;
+  padding:14px 20px 24px 20px !important;
+  border-radius:0 0 8px 8px;
+  border-top:none;
+  font-family:Georgia,'Times New Roman',serif;
+  opacity:0;
+  transform:rotate(-2deg) translateY(-10px);
+  animation:paper-unfold .5s var(--ease) forwards;
+  animation-delay:.05s;
+}
+/* when there's no "Project:" line, the list is the whole clipping */
+.experience-card > summary + ul{border-radius:8px;margin-top:0}
+
+.experience-container .experience-card:nth-child(odd) > p,
+.experience-container .experience-card:nth-child(odd) > ul{
+  --tilt:-1.1deg;
+}
+.experience-container .experience-card:nth-child(even) > p,
+.experience-container .experience-card:nth-child(even) > ul{
+  --tilt:1.1deg;
+}
+@keyframes paper-unfold{
+  0%{ opacity:0; transform:rotate(-3deg) translateY(-10px) scale(.97); }
+  70%{ opacity:1; transform:rotate(var(--tilt,0deg)) translateY(1px) scale(1.005); }
+  100%{ opacity:1; transform:rotate(var(--tilt,0deg)) translateY(0) scale(1); }
+}
+.experience-card li{margin-bottom:12px;line-height:1.8;font-family:var(--font-body)}
 
 /* ---------- Contact -------------------------------------------------------- */
 .contact>p{
