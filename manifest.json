@@ -1,0 +1,26 @@
+[
+  {
+    "title": "DITA Best Practices Guide",
+    "description": "Personal notes and best practices I keep coming back to for structuring DITA topics, maps, and reuse strategies.",
+    "type": "pdf",
+    "tags": ["DITA", "Structured Authoring"],
+    "url": "knowledge-base/files/sample-placeholder.pdf",
+    "dateAdded": "2026-06-15"
+  },
+  {
+    "title": "Google Developer Documentation Style Guide",
+    "description": "One of the style guides I reference most often for tone, voice, and formatting consistency in technical content.",
+    "type": "link",
+    "tags": ["Style Guide", "API Docs"],
+    "url": "https://developers.google.com/style",
+    "dateAdded": "2026-05-02"
+  },
+  {
+    "title": "Docs as Code — Notes & Workflow",
+    "description": "My working notes on setting up a docs-as-code pipeline with Git, Markdown, and CI-driven publishing.",
+    "type": "doc",
+    "tags": ["Docs-as-Code", "Git"],
+    "url": "knowledge-base/files/sample-placeholder.pdf",
+    "dateAdded": "2026-03-20"
+  }
+]

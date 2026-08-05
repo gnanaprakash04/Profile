@@ -63,4 +63,80 @@
     toggleNavShadow();
     window.addEventListener('scroll', toggleNavShadow, { passive: true });
   }
+
+  // ---------------------------------------------------------------------
+  // Knowledge Base — reads knowledge-base/manifest.json and renders it.
+  // To add a resource: drop the file in knowledge-base/files/, add an
+  // entry to manifest.json, commit & push. See knowledge-base/README.md.
+  // ---------------------------------------------------------------------
+  var kbGrid = document.getElementById('kb-grid');
+  if (kbGrid) {
+    var kbSearch = document.getElementById('kb-search');
+    var kbItems = [];
+
+    var typeMeta = {
+      pdf: { icon: '📄', label: 'PDF' },
+      doc: { icon: '📝', label: 'Doc' },
+      link: { icon: '🔗', label: 'Link' }
+    };
+
+    function escapeHtml(str) {
+      var div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function renderKb(items) {
+      if (!items.length) {
+        kbGrid.innerHTML = '<p class="kb-status">No resources match that search.</p>';
+        return;
+      }
+      kbGrid.innerHTML = items.map(function (item, i) {
+        var meta = typeMeta[item.type] || typeMeta.link;
+        var tags = (item.tags || []).map(function (t) {
+          return '<li>' + escapeHtml(t) + '</li>';
+        }).join('');
+        return (
+          '<article class="kb-card" style="animation-delay:' + (i * 0.05) + 's">' +
+            '<span class="kb-type">' + meta.icon + ' ' + meta.label + '</span>' +
+            '<h3>' + escapeHtml(item.title) + '</h3>' +
+            '<p>' + escapeHtml(item.description || '') + '</p>' +
+            (tags ? '<ul class="kb-tags">' + tags + '</ul>' : '') +
+            '<a class="kb-link" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' +
+              (item.type === 'link' ? 'Visit resource' : 'View / Download') +
+            '</a>' +
+          '</article>'
+        );
+      }).join('');
+    }
+
+    fetch('knowledge-base/manifest.json')
+      .then(function (res) {
+        if (!res.ok) throw new Error('manifest not found');
+        return res.json();
+      })
+      .then(function (data) {
+        kbItems = (data || []).slice().sort(function (a, b) {
+          return (b.dateAdded || '').localeCompare(a.dateAdded || '');
+        });
+        renderKb(kbItems);
+      })
+      .catch(function () {
+        kbGrid.innerHTML = '<p class="kb-status">The knowledge base is still being set up — check back soon.</p>';
+      });
+
+    if (kbSearch) {
+      kbSearch.addEventListener('input', function () {
+        var q = kbSearch.value.trim().toLowerCase();
+        if (!q) { renderKb(kbItems); return; }
+        var filtered = kbItems.filter(function (item) {
+          var haystack = (
+            item.title + ' ' + (item.description || '') + ' ' + (item.tags || []).join(' ')
+          ).toLowerCase();
+          return haystack.indexOf(q) !== -1;
+        });
+        renderKb(filtered);
+      });
+    }
+  }
 })();
