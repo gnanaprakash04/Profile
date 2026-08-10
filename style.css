@@ -95,8 +95,7 @@ nav a:hover{color:var(--green)}
 nav a:hover::after{transform:scaleX(1)}
 
 /* ---------- Shared surfaces --------------------------------------------- */
-.skill-card,.experience-card,.project-card,.award-card,
-.education-card,.contact-card,.stat-card{
+.experience-card,.award-card,.contact-card,.stat-card{
   background:var(--surface);
   border-radius:var(--radius);
   box-shadow:var(--shadow-sm);
@@ -202,7 +201,7 @@ nav a:hover::after{transform:scaleX(1)}
 }
 
 /* ---------- Layout helpers ------------------------------------------------ */
-.stats,.skills-container,.project-container,.award-container,
+.stats,.project-container,.award-container,
 .education-container,.contact-container{
   display:flex;justify-content:center;gap:30px;flex-wrap:wrap;
 }
@@ -253,28 +252,77 @@ section > h2::after{
 .reveal.in-view{opacity:1;transform:translateY(0)}
 
 /* ---------- Cards --------------------------------------------------------- */
-.skill-card,.project-card,.award-card,.contact-card{
+.award-card,.contact-card{
   width:300px;padding:26px;text-align:center;
   transition:transform .3s var(--ease), box-shadow .3s var(--ease);
 }
-.education-card{width:400px;padding:30px;transition:transform .3s var(--ease), box-shadow .3s var(--ease)}
 
 .experience-container{display:flex;flex-direction:column;gap:22px}
 .experience-card{padding:0;transition:box-shadow .3s var(--ease)}
 
-.skill-card:hover,.experience-card:hover,.project-card:hover,.award-card:hover,
-.education-card:hover,.contact-card:hover{
+.award-card:hover,.contact-card:hover{
   transform:translateY(-8px);
   box-shadow:var(--shadow-lg);
 }
 
-.skill-card h3,.experience-card h3,.project-card h3,.award-card h3,.education-card h3{
+.experience-card h3,.award-card h3,.education-card h3{
   color:var(--green);margin-bottom:14px;
 }
+
+/* Work Samples & Education — unboxed, background-free, no border, in the
+   same open style as About Me (just without the sketch frame). */
+.project-card{
+  width:300px;padding:22px 4px;text-align:center;
+  background:transparent;
+  transition:transform .3s var(--ease);
+}
+.project-card:hover{transform:translateY(-6px)}
+.project-card h3{color:var(--green);margin-bottom:14px}
+
+.education-card{
+  width:400px;padding:22px 4px;
+  background:transparent;
+  transition:transform .3s var(--ease);
+}
+.education-card:hover{transform:translateY(-6px)}
+.education-card h3{color:var(--green);margin-bottom:14px}
 
 .date{color:var(--text-muted);font-style:italic;margin-bottom:18px;font-size:.92rem}
 ul{padding-left:20px}
 li{margin-bottom:10px}
+
+/* ---------- Skills — grouped pill panel ------------------------------------ */
+.skills-panel{
+  max-width:720px;margin:0 auto;padding:34px 40px;
+  background:var(--surface);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+}
+.skill-group{
+  margin-bottom:28px;
+  opacity:0;transform:translateY(14px);
+  transition:opacity .5s var(--ease), transform .5s var(--ease);
+}
+.skills.in-view .skill-group{opacity:1;transform:translateY(0)}
+.skill-group:last-child{margin-bottom:0}
+.skills-panel .skill-group:nth-child(1){transition-delay:.05s}
+.skills-panel .skill-group:nth-child(2){transition-delay:.15s}
+.skills-panel .skill-group:nth-child(3){transition-delay:.25s}
+
+.skill-group-title{
+  font-family:var(--font-head);font-size:.78rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;
+  color:var(--text-muted);margin-bottom:14px;text-align:left;
+}
+.skill-pills{display:flex;flex-wrap:wrap;gap:10px}
+.skill-pill{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--green-dark);color:#fff;
+  padding:9px 14px;border-radius:8px;
+  font-size:.85rem;font-weight:600;
+  transition:background .2s var(--ease), transform .2s var(--ease);
+}
+.skill-pill:hover{background:var(--green);transform:translateY(-2px)}
 
 /* ---------- Stats — one row of numbered blocks (count-up target) ----------- */
 .stats{
@@ -482,10 +530,10 @@ li{margin-bottom:10px}
 
 /* ---------- Footer ---------------------------------------------------------- */
 footer{
-  background:var(--green-dark);color:#fff;text-align:center;padding:38px 20px;margin-top:90px;
+  background:var(--bg);color:var(--text);text-align:center;padding:38px 20px;margin-top:90px;
 }
-footer h3{font-family:var(--font-head);margin-bottom:6px}
-footer p{color:#D7E4DB;font-size:.92rem}
+footer h3{font-family:var(--font-head);margin-bottom:6px;color:var(--green-dark)}
+footer p{color:var(--text-muted);font-size:.92rem}
 
 /* ---------- Responsive -------------------------------------------------------- */
 @media(max-width:768px){
@@ -501,7 +549,8 @@ footer p{color:#D7E4DB;font-size:.92rem}
   .hero-image{order:-1;min-height:260px}
   .hero-image img{max-width:220px}
   .hero-badge{left:50%;transform:translateX(-50%);bottom:-16px}
-  .skill-card,.experience-card,.project-card,.award-card,.education-card,.contact-card{width:100%}
+  .experience-card,.award-card,.contact-card,.project-card,.education-card{width:100%}
+  .skills-panel{padding:26px 22px}
   .stats{flex-wrap:wrap}
   .stat-card{flex:1 1 calc(50% - 18px)}
 }
