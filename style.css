@@ -293,7 +293,7 @@ li{margin-bottom:10px}
 
 /* ---------- Skills — grouped pill panel ------------------------------------ */
 .skills-panel{
-  max-width:720px;margin:0 auto;padding:34px 40px;
+  max-width:980px;margin:0 auto;padding:34px 40px;
   background:var(--surface);
   border-radius:var(--radius);
   box-shadow:var(--shadow-sm);
@@ -312,14 +312,15 @@ li{margin-bottom:10px}
 .skill-group-title{
   font-family:var(--font-head);font-size:.78rem;font-weight:700;
   text-transform:uppercase;letter-spacing:.08em;
-  color:var(--text-muted);margin-bottom:14px;text-align:left;
+  color:var(--text-muted);margin-bottom:14px;text-align:center;
 }
-.skill-pills{display:flex;flex-wrap:wrap;gap:10px}
+.skill-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
 .skill-pill{
   display:inline-flex;align-items:center;gap:7px;
   background:var(--green-dark);color:#fff;
-  padding:9px 14px;border-radius:8px;
-  font-size:.85rem;font-weight:600;
+  padding:8px 12px;border-radius:8px;
+  font-size:.82rem;font-weight:600;
+  white-space:nowrap;
   transition:background .2s var(--ease), transform .2s var(--ease);
 }
 .skill-pill:hover{background:var(--green);transform:translateY(-2px)}
