@@ -103,7 +103,7 @@ nav a:hover::after{transform:scaleX(1)}
 
 /* ---------- Hero --------------------------------------------------------- */
 .hero{
-  width:88%;max-width:1180px;margin:70px auto;padding:0;
+  width:88%;max-width:1180px;margin:45px auto;padding:0;
   display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:50px;
   position:relative;
   opacity:0;
@@ -206,10 +206,10 @@ nav a:hover::after{transform:scaleX(1)}
   display:flex;justify-content:center;gap:30px;flex-wrap:wrap;
 }
 .stats,.skills,.experience,.projects,.awards,.education,.knowledge,.contact{
-  width:80%;margin:80px auto;
+  width:80%;margin:45px auto;
 }
 .about{
-  width:70%;margin:80px auto;padding:50px 60px;
+  width:70%;margin:45px auto;padding:50px 60px;
   position:relative;
   background:transparent;
 }
@@ -531,7 +531,7 @@ li{margin-bottom:10px}
 
 /* ---------- Footer ---------------------------------------------------------- */
 footer{
-  background:var(--bg);color:var(--text);text-align:center;padding:38px 20px;margin-top:90px;
+  background:var(--bg);color:var(--text);text-align:center;padding:24px 20px 14px;margin-top:45px;
 }
 footer h3{font-family:var(--font-head);margin-bottom:6px;color:var(--green-dark)}
 footer p{color:var(--text-muted);font-size:.92rem}
