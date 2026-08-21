@@ -647,6 +647,5 @@ footer p{color:var(--text-muted);font-size:.92rem}
   .notebook{margin-left:16px;padding:36px 24px 46px 30px;transform:rotate(0)}
   .notebook::before{left:-14px;width:22px}
   .notebook h2{font-size:1.7rem}
-  .pen-deco{width:100px;right:10%;bottom:2px}
   .paperclip-deco{width:36px;height:36px;right:18px;top:-16px}
 }
