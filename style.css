@@ -258,16 +258,24 @@ nav a:hover::after{transform:scaleX(1)}
   transform:rotate(-0.6deg);
 }
 .notebook::before{
-  /* spiral binding — a repeating column of ring shapes along the left edge */
+  /* spiral binding — a repeating column of embossed ring shapes running
+     the full height of the page, fading in/out at the top and bottom
+     edges instead of cutting off mid-ring. */
   content:'';
   position:absolute;
-  top:22px;bottom:22px;left:-20px;
-  width:30px;
-  background-image:radial-gradient(circle at 15px center, transparent 0 6px, var(--green-dark) 6px 8px, transparent 8px 100%);
+  top:0;bottom:0;left:-20px;
+  width:32px;
+  background-image:radial-gradient(ellipse 8px 12px at 16px center,
+    transparent 0 6px,
+    rgba(255,255,255,.65) 6px 7.5px,
+    var(--green-dark) 7.5px 9.5px,
+    transparent 9.5px 100%);
   background-repeat:repeat-y;
-  background-size:100% 30px;
-  opacity:.7;
-  filter:drop-shadow(1px 1px 1px rgba(0,0,0,.15));
+  background-size:100% 34px;
+  background-position:0 8px;
+  opacity:.85;
+  -webkit-mask-image:linear-gradient(to bottom, transparent 0, black 22px, black calc(100% - 22px), transparent 100%);
+  mask-image:linear-gradient(to bottom, transparent 0, black 22px, black calc(100% - 22px), transparent 100%);
 }
 .notebook::after{
   /* a thin bottom edge, like the page sitting slightly above the one below it */
@@ -293,7 +301,7 @@ nav a:hover::after{transform:scaleX(1)}
 
 .notebook h2{
   font-family:'Playfair Display', var(--font-head), serif;
-  text-align:left;
+  text-align:center;
   font-size:2.2rem;
   line-height:1.15;
   color:var(--green-dark);
@@ -311,25 +319,21 @@ nav a:hover::after{transform:scaleX(1)}
 }
 .notebook p:last-of-type{margin-bottom:0}
 
-.about-signature{
-  font-family:'Caveat', cursive;
-  font-size:2rem;
-  color:var(--green-dark);
-  margin-top:26px !important;
-  text-align:right;
-  padding-right:20px;
-}
-
-.pen-deco{
+.quill-deco{
   position:absolute;
-  bottom:-14px;right:8%;
-  width:180px;
-  transform:rotate(-30deg);
-  filter:drop-shadow(2px 3px 3px rgba(0,0,0,.2));
+  bottom:-6px;right:9%;
+  width:110px;
+  transform:rotate(-8deg);
+  filter:drop-shadow(2px 3px 3px rgba(0,0,0,.18));
 }
-.pen-body{fill:var(--green-dark)}
-.pen-band{fill:var(--gold)}
-.pen-tip{fill:var(--green-dark)}
+.quill-feather{fill:var(--surface);stroke:var(--green-dark);stroke-width:2.5}
+.quill-vein{stroke:var(--green-dark);stroke-width:1;opacity:.5}
+.quill-barbs line{stroke:var(--green-dark);stroke-width:1.6;opacity:.55}
+.quill-nib{fill:var(--gold);stroke:var(--green-dark);stroke-width:1}
+.bottle-glass{fill:rgba(46,125,50,.14);stroke:var(--green-dark);stroke-width:1.8}
+.bottle-neck{fill:rgba(46,125,50,.14);stroke:var(--green-dark);stroke-width:1.8}
+.bottle-cork{fill:var(--gold);stroke:var(--green-dark);stroke-width:1}
+.bottle-ink{fill:var(--green-dark);opacity:.85}
 
 h2{text-align:center;color:var(--green-dark);margin-bottom:14px;font-size:1.9rem}
 section > h2::after{
@@ -653,8 +657,8 @@ footer p{color:var(--text-muted);font-size:.92rem}
   .stats{flex-wrap:wrap}
   .stat-card{flex:1 1 calc(50% - 18px)}
   .notebook{margin-left:16px;padding:36px 24px 46px 30px;transform:rotate(0)}
-  .notebook::before{left:-14px;width:22px}
+  .notebook::before{left:-14px;width:22px;background-position:-5px 8px}
   .notebook h2{font-size:1.7rem}
-  .pen-deco{width:130px;right:4%;bottom:-10px}
+  .quill-deco{width:80px;right:5%;bottom:-4px}
   .paperclip-deco{width:36px;height:36px;right:18px;top:-16px}
 }
