@@ -158,4 +158,46 @@
       });
     }
   }
+  // ---------------------------------------------------------------------
+  // Custom cursor — a dark-red arrow that follows the mouse and reacts
+  // (grows + shifts to gold) over anything clickable. Only enabled on
+  // devices that actually have a mouse; touch devices are left alone.
+  // ---------------------------------------------------------------------
+  var supportsCustomCursor = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  if (supportsCustomCursor) {
+    var cursorEl = document.createElement('div');
+    cursorEl.className = 'custom-cursor';
+    cursorEl.innerHTML =
+      '<svg viewBox="0 0 24 24" aria-hidden="true">' +
+        '<path d="M3 2 L3 21 L8 16 L11 22 L14 20.5 L11 15 L18 15 Z"></path>' +
+      '</svg>';
+    document.body.appendChild(cursorEl);
+    document.documentElement.classList.add('custom-cursor-active');
+
+    document.addEventListener('mousemove', function (e) {
+      cursorEl.classList.add('is-visible');
+      cursorEl.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
+    });
+
+    document.addEventListener('mouseleave', function () {
+      cursorEl.classList.remove('is-visible');
+    });
+
+    // Event delegation so dynamically-added elements (like Knowledge
+    // Base cards, which load after a fetch) are still picked up.
+    var interactiveSelector = 'a, button, summary, label, input, .kb-card, .skill-pill';
+    document.addEventListener('pointerover', function (e) {
+      if (e.target.closest(interactiveSelector)) {
+        cursorEl.classList.add('is-hover');
+      }
+    });
+    document.addEventListener('pointerout', function (e) {
+      var leavingInteractive = e.target.closest(interactiveSelector);
+      var enteringInteractive = e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(interactiveSelector);
+      if (leavingInteractive && !enteringInteractive) {
+        cursorEl.classList.remove('is-hover');
+      }
+    });
+  }
 })();

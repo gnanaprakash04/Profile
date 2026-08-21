@@ -31,14 +31,43 @@
 
 html{scroll-behavior:smooth}
 
-/* Custom pen cursor — fits the "technical writer" identity better than a
-   plain arrow. Hotspot sits at the nib tip. Applied everywhere, including
-   links/buttons/summary, so it doesn't fall back to the default pointer. */
-html,body{
-  cursor:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8bGluZSB4MT0iMjciIHkxPSI1IiB4Mj0iMTAiIHkyPSIyMiIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSIyNyIgeTE9IjUiIHgyPSIxMCIgeTI9IjIyIiBzdHJva2U9IiMxQjQzMzIiIHN0cm9rZS13aWR0aD0iNC4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cG9seWdvbiBwb2ludHM9IjEwLDIyIDE1LDIxLjUgNiwzMSA0LDI5IiBmaWxsPSIjRDRBMDE3IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K") 4 29, auto;
+/* Custom cursor — a dark-red arrow that follows the pointer via JS
+   (see reveal.js) and reacts when hovering anything clickable: it grows
+   and shifts to gold, giving real interactive feedback instead of a
+   static icon. Only activates on devices with a real mouse (desktop);
+   touch devices keep the normal system cursor, and if JS fails to run
+   for any reason the browser's default arrow is still there as a
+   fallback since nothing here forces cursor:none on its own. */
+html.custom-cursor-active,
+html.custom-cursor-active *{
+  cursor:none !important;
 }
-a,button,summary,label,.hero a,.btn,nav a{
-  cursor:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8bGluZSB4MT0iMjciIHkxPSI1IiB4Mj0iMTAiIHkyPSIyMiIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSIyNyIgeTE9IjUiIHgyPSIxMCIgeTI9IjIyIiBzdHJva2U9IiMxQjQzMzIiIHN0cm9rZS13aWR0aD0iNC4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cG9seWdvbiBwb2ludHM9IjEwLDIyIDE1LDIxLjUgNiwzMSA0LDI5IiBmaWxsPSIjRDRBMDE3IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K") 4 29, pointer;
+.custom-cursor{
+  position:fixed;
+  top:0;left:0;
+  width:22px;height:22px;
+  pointer-events:none;
+  z-index:9999;
+  transform:translate(-100px,-100px);
+  transition:transform .12s ease-out, opacity .15s ease;
+  opacity:0;
+  will-change:transform;
+}
+.custom-cursor svg{width:100%;height:100%;display:block}
+.custom-cursor path{
+  fill:#8B1E1E;
+  stroke:#ffffff;
+  stroke-width:1.2;
+  stroke-linejoin:round;
+  transition:fill .15s ease;
+}
+.custom-cursor.is-visible{opacity:1}
+.custom-cursor.is-hover{
+  transform-origin:4px 4px;
+}
+.custom-cursor.is-hover path{fill:var(--gold)}
+.custom-cursor.is-hover svg{
+  transform:scale(1.35);
 }
 
 body{
