@@ -4,7 +4,7 @@
    spacing, scroll-reveal + count-up animations (see reveal.js).
    ========================================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&family=Caveat:wght@600&display=swap');
 
 /* ---------- Design tokens ---------------------------------------------- */
 :root{
@@ -238,29 +238,98 @@ nav a:hover::after{transform:scaleX(1)}
   width:80%;margin:45px auto;
 }
 .about{
-  width:70%;margin:45px auto;padding:50px 60px;
+  width:70%;margin:45px auto;padding:0;
   position:relative;
   background:transparent;
 }
-/* Hand-drawn pencil frame — two overlapping wobbly strokes, like a sketch
-   redrawn twice, sitting slightly askew for an imperfect, hand-made feel. */
-.sketch-border{
+
+/* ---------- About Me — spiral notebook page -------------------------------- */
+.notebook{
+  position:relative;
+  margin-left:26px; /* room for the spiral to sit half-off the edge */
+  padding:46px 56px 56px 60px;
+  background:
+    repeating-linear-gradient(var(--bg) 0 27px, #DCEAE0 27px 28px),
+    repeating-linear-gradient(90deg, var(--bg) 0 27px, #DCEAE0 27px 28px),
+    var(--surface);
+  background-blend-mode:multiply;
+  border-radius:10px;
+  box-shadow:var(--shadow-lg);
+  transform:rotate(-0.6deg);
+}
+.notebook::before{
+  /* spiral binding — a repeating column of ring shapes along the left edge */
+  content:'';
   position:absolute;
-  inset:-6px;
-  width:calc(100% + 12px);
-  height:calc(100% + 12px);
+  top:22px;bottom:22px;left:-20px;
+  width:30px;
+  background-image:radial-gradient(circle at 15px center, transparent 0 6px, var(--green-dark) 6px 8px, transparent 8px 100%);
+  background-repeat:repeat-y;
+  background-size:100% 30px;
+  opacity:.7;
+  filter:drop-shadow(1px 1px 1px rgba(0,0,0,.15));
+}
+.notebook::after{
+  /* a thin bottom edge, like the page sitting slightly above the one below it */
+  content:'';
+  position:absolute;
+  left:14px;right:-4px;bottom:-6px;
+  height:10px;
+  background:var(--green-deep);
+  border-radius:0 0 10px 10px;
   z-index:-1;
-  pointer-events:none;
-  transform:rotate(-0.3deg);
+  opacity:.85;
 }
-.sketch-border path{
-  fill:none;
-  stroke:var(--green-dark);
-  stroke-width:1;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  opacity:.4;
+
+.paperclip-deco{
+  position:absolute;
+  top:-22px;right:34px;
+  width:46px;height:46px;
+  color:var(--gold);
+  transform:rotate(18deg);
+  filter:drop-shadow(1px 2px 2px rgba(0,0,0,.18));
 }
+.paperclip-deco path{stroke:currentColor;stroke-width:1.6}
+
+.notebook h2{
+  font-family:'Playfair Display', var(--font-head), serif;
+  text-align:left;
+  font-size:2.2rem;
+  line-height:1.15;
+  color:var(--green-dark);
+  margin-bottom:22px;
+}
+.notebook h2::after{display:none}
+.notebook h2::before{content:none}
+
+.notebook p{
+  font-family:Georgia,'Times New Roman',serif;
+  color:var(--text);
+  font-size:1.02rem;
+  line-height:1.85;
+  margin-bottom:16px;
+}
+.notebook p:last-of-type{margin-bottom:0}
+
+.about-signature{
+  font-family:'Caveat', cursive;
+  font-size:2rem;
+  color:var(--green-dark);
+  margin-top:26px !important;
+  text-align:right;
+  padding-right:20px;
+}
+
+.pen-deco{
+  position:absolute;
+  bottom:-14px;right:8%;
+  width:180px;
+  transform:rotate(-30deg);
+  filter:drop-shadow(2px 3px 3px rgba(0,0,0,.2));
+}
+.pen-body{fill:var(--green-dark)}
+.pen-band{fill:var(--gold)}
+.pen-tip{fill:var(--green-dark)}
 
 h2{text-align:center;color:var(--green-dark);margin-bottom:14px;font-size:1.9rem}
 section > h2::after{
@@ -583,4 +652,9 @@ footer p{color:var(--text-muted);font-size:.92rem}
   .skills-panel{padding:26px 22px}
   .stats{flex-wrap:wrap}
   .stat-card{flex:1 1 calc(50% - 18px)}
+  .notebook{margin-left:16px;padding:36px 24px 46px 30px;transform:rotate(0)}
+  .notebook::before{left:-14px;width:22px}
+  .notebook h2{font-size:1.7rem}
+  .pen-deco{width:130px;right:4%;bottom:-10px}
+  .paperclip-deco{width:36px;height:36px;right:18px;top:-16px}
 }
