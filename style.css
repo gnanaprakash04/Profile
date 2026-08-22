@@ -255,7 +255,7 @@ nav a:hover::after{transform:scaleX(1)}
   background-blend-mode:multiply;
   border-radius:10px;
   box-shadow:var(--shadow-lg);
-  transform:rotate(-0.6deg);
+  transform:rotate(-0deg);
 }
 .notebook::before{
   /* spiral binding — a repeating column of ring shapes along the left edge */
