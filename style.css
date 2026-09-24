@@ -311,7 +311,7 @@ nav a:hover::after{transform:scaleX(1)}
 }
 .notebook p:last-of-type{margin-bottom:0}
 
-.pen-deco{
+/*.pen-deco{
   position:absolute;
   bottom:6px;right:14%;
   width:150px;
@@ -321,7 +321,7 @@ nav a:hover::after{transform:scaleX(1)}
 }
 .pen-body{fill:var(--green-dark)}
 .pen-band{fill:var(--gold)}
-.pen-tip{fill:var(--green-dark)}
+.pen-tip{fill:var(--green-dark)}*/
 
 h2{text-align:center;color:var(--green-dark);margin-bottom:14px;font-size:1.9rem}
 section > h2::after{
