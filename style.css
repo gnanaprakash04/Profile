@@ -510,12 +510,12 @@ li{margin-bottom:10px}
 }
 .experience-card li{margin-bottom:12px;line-height:1.8;font-family:var(--font-body)}
 
-/* ---------- Career Timeline (overview above the accordions) --------------- */
+/* ---------- Career Timeline — vertical, alternating sides ------------------ */
 .career-timeline{
-  margin:0 auto 8px;
-  max-width:900px;
-  overflow-x:auto;
-  padding-bottom:6px;
+  position:relative;
+  max-width:640px;
+  margin:0 auto 10px;
+  padding:10px 0 0;
 }
 .timeline-hint{
   text-align:center;
@@ -524,54 +524,47 @@ li{margin-bottom:10px}
   font-style:italic;
   margin:0 0 44px;
 }
-.timeline-track{
-  display:flex;
-  justify-content:space-between;
-  gap:8px;
-  position:relative;
-  min-width:560px;
-  padding-top:8px;
-}
-.timeline-track::before{
-  content:'';
+
+/* the connecting spine — draws itself in (top to bottom) once the
+   Experience section scrolls into view */
+.timeline-line{
   position:absolute;
-  top:16px;left:0;right:0;
-  height:2px;
-  background:#DCE7DF;
-  z-index:0;
+  top:0;bottom:0;left:50%;
+  width:3px;
+  background:linear-gradient(var(--green) 0%, var(--gold) 100%);
+  border-radius:2px;
+  opacity:.6;
+  transform:translateX(-50%) scaleY(0);
+  transform-origin:top;
+  transition:transform 1.1s ease;
 }
+.experience.in-view .timeline-line{transform:translateX(-50%) scaleY(1)}
+
 .timeline-node{
   position:relative;
-  z-index:1;
-  display:flex;flex-direction:column;align-items:center;
-  flex:1;
-  text-align:center;
-  background:none;
-  border:none;
-  padding:0;
-  font-family:inherit;
+  display:flex;align-items:center;
+  width:100%;
+  margin-bottom:30px;
+  background:none;border:none;padding:0;font-family:inherit;
 }
+.timeline-node:last-child{margin-bottom:0}
+.timeline-node--left{justify-content:flex-end}
+.timeline-node--right{justify-content:flex-start;flex-direction:row-reverse}
+
 .timeline-dot{
-  width:14px;height:14px;
+  position:absolute;left:50%;top:50%;
+  width:16px;height:16px;
   border-radius:50%;
   background:var(--surface);
   border:3px solid var(--green);
-  margin-bottom:12px;
+  transform:translate(-50%,-50%);
+  z-index:1;
   transition:transform .2s var(--ease), box-shadow .2s var(--ease);
 }
-.timeline-node:hover .timeline-dot{transform:scale(1.25);box-shadow:0 0 0 5px rgba(46,125,50,.15)}
-.timeline-node:hover .timeline-label strong{color:var(--green)}
+.timeline-node:hover .timeline-dot{transform:translate(-50%,-50%) scale(1.25);box-shadow:0 0 0 5px rgba(46,125,50,.15)}
 .timeline-node.is-active-target .timeline-dot{
-  transform:scale(1.3);
+  transform:translate(-50%,-50%) scale(1.3);
   box-shadow:0 0 0 6px rgba(46,125,50,.22);
-}
-.timeline-label{display:flex;flex-direction:column;gap:2px;transition:transform .15s var(--ease)}
-.timeline-label strong{
-  font-family:var(--font-head);font-size:.85rem;color:var(--green-dark);
-  transition:color .2s var(--ease);
-}
-.timeline-label span{
-  font-size:.78rem;color:var(--text-muted);white-space:nowrap;
 }
 .timeline-node.is-ai-milestone .timeline-dot{
   border-color:var(--gold);
@@ -579,15 +572,40 @@ li{margin-bottom:10px}
   box-shadow:0 0 0 4px rgba(212,160,23,.2);
 }
 .timeline-node.is-ai-milestone:hover .timeline-dot{box-shadow:0 0 0 6px rgba(212,160,23,.28)}
+
+.timeline-label{
+  width:46%;
+  display:flex;flex-direction:column;gap:2px;
+  background:var(--surface);
+  border-radius:12px;
+  padding:14px 18px;
+  box-shadow:var(--shadow-sm);
+  transition:transform .2s var(--ease), box-shadow .2s var(--ease);
+}
+.timeline-node:hover .timeline-label{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.timeline-node--left .timeline-label{text-align:right;margin-right:26px}
+.timeline-node--right .timeline-label{text-align:left;margin-left:26px}
+.timeline-label strong{
+  font-family:var(--font-mono, monospace);font-size:.72rem;font-weight:700;
+  letter-spacing:.04em;color:var(--gold);
+}
+.timeline-label span{
+  font-family:var(--font-head);font-size:.95rem;font-weight:700;color:var(--green-dark);
+  margin-top:3px;
+}
+.timeline-label em{
+  font-style:normal;font-size:.8rem;color:var(--text-muted);margin-top:1px;
+}
+.timeline-node.is-ai-milestone .timeline-label{border:1px solid #E8D28A}
 .timeline-badge{
-  margin-top:8px;
+  margin-top:10px;
   font-size:.72rem;font-weight:700;
   color:var(--green-deep);
   background:#EAF6EC;
   border:1px solid #cfe6d3;
   padding:4px 9px;
   border-radius:999px;
-  white-space:nowrap;
+  display:inline-block;
 }
 
 /* Brief highlight flash on the experience card a timeline node points to */
@@ -645,6 +663,50 @@ li{margin-bottom:10px}
   text-align:center;color:var(--text-muted);font-size:.9rem;font-style:italic;
   max-width:70ch;margin:0 auto;
 }
+
+/* Collapsible "why AI works" article, styled with the same readable
+   serif register used elsewhere for longer-form text. */
+.ai-article{
+  max-width:720px;
+  margin:34px auto 0;
+  background:var(--surface);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  overflow:hidden;
+}
+.ai-article summary{
+  cursor:pointer;
+  list-style:none;
+  padding:20px 26px;
+  font-family:var(--font-head);
+  font-weight:600;
+  font-size:1rem;
+  color:var(--green-dark);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:14px;
+  transition:background .2s var(--ease);
+}
+.ai-article summary::-webkit-details-marker{display:none}
+.ai-article summary:hover{background:var(--bg)}
+.ai-article summary::after{
+  content:"❯";
+  font-size:18px;color:var(--gold);
+  transition:transform .3s var(--ease);
+  flex-shrink:0;
+}
+.ai-article[open] summary::after{transform:rotate(90deg)}
+.ai-article-body{
+  padding:4px 26px 28px;
+  animation:fade-up .35s var(--ease) forwards;
+}
+.ai-article-body p{
+  font-family:Georgia,'Times New Roman',serif;
+  color:var(--text);
+  font-size:.98rem;
+  line-height:1.85;
+  margin-bottom:16px;
+}
+.ai-article-body p:last-child{margin-bottom:0}
 
 /* ---------- Knowledge Base -------------------------------------------------- */
 .kb-intro{
@@ -770,8 +832,17 @@ footer p{color:var(--text-muted);font-size:.92rem}
   .stat-card{flex:1 1 calc(50% - 18px)}
   .notebook{margin-left:16px;padding:36px 24px 46px 30px;transform:rotate(0)}
   .notebook::before{left:-14px;width:22px}
-  .career-timeline{overflow-x:auto}
-  .timeline-track{min-width:560px}
+  .timeline-line{left:16px;transform:scaleY(0)}
+  .experience.in-view .timeline-line{transform:scaleY(1)}
+  .timeline-node,.timeline-node--right{flex-direction:row;justify-content:flex-start}
+  .timeline-dot{left:16px}
+  .timeline-node:hover .timeline-dot{transform:translate(-50%,-50%) scale(1.25)}
+  .timeline-node.is-active-target .timeline-dot{transform:translate(-50%,-50%) scale(1.3)}
+  .timeline-label,.timeline-node--left .timeline-label,.timeline-node--right .timeline-label{
+    width:calc(100% - 46px);
+    margin-left:40px;margin-right:0;
+    text-align:left;
+  }
   .workflow-compare{flex-direction:column}
   .workflow-arrow{transform:rotate(90deg);margin:-4px auto}
   .notebook h2{font-size:1.7rem}
