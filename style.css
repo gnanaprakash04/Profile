@@ -311,18 +311,6 @@ nav a:hover::after{transform:scaleX(1)}
 }
 .notebook p:last-of-type{margin-bottom:0}
 
-.pen-deco{
-  position:absolute;
-  bottom:6px;right:14%;
-  width:150px;
-  transform:rotate(90deg);
-  transform-origin:center;
-  filter:drop-shadow(2px 3px 3px rgba(0,0,0,.2));
-}
-.pen-body{fill:var(--green-dark)}
-.pen-band{fill:var(--gold)}
-.pen-tip{fill:var(--green-dark)}
-
 h2{text-align:center;color:var(--green-dark);margin-bottom:14px;font-size:1.9rem}
 section > h2::after{
   content:'';
@@ -524,10 +512,17 @@ li{margin-bottom:10px}
 
 /* ---------- Career Timeline (overview above the accordions) --------------- */
 .career-timeline{
-  margin:0 auto 44px;
+  margin:0 auto 8px;
   max-width:900px;
   overflow-x:auto;
   padding-bottom:6px;
+}
+.timeline-hint{
+  text-align:center;
+  font-size:.78rem;
+  color:var(--text-muted);
+  font-style:italic;
+  margin:0 0 44px;
 }
 .timeline-track{
   display:flex;
@@ -551,6 +546,10 @@ li{margin-bottom:10px}
   display:flex;flex-direction:column;align-items:center;
   flex:1;
   text-align:center;
+  background:none;
+  border:none;
+  padding:0;
+  font-family:inherit;
 }
 .timeline-dot{
   width:14px;height:14px;
@@ -558,12 +557,18 @@ li{margin-bottom:10px}
   background:var(--surface);
   border:3px solid var(--green);
   margin-bottom:12px;
-  transition:transform .2s var(--ease);
+  transition:transform .2s var(--ease), box-shadow .2s var(--ease);
 }
-.timeline-node:hover .timeline-dot{transform:scale(1.2)}
-.timeline-label{display:flex;flex-direction:column;gap:2px}
+.timeline-node:hover .timeline-dot{transform:scale(1.25);box-shadow:0 0 0 5px rgba(46,125,50,.15)}
+.timeline-node:hover .timeline-label strong{color:var(--green)}
+.timeline-node.is-active-target .timeline-dot{
+  transform:scale(1.3);
+  box-shadow:0 0 0 6px rgba(46,125,50,.22);
+}
+.timeline-label{display:flex;flex-direction:column;gap:2px;transition:transform .15s var(--ease)}
 .timeline-label strong{
   font-family:var(--font-head);font-size:.85rem;color:var(--green-dark);
+  transition:color .2s var(--ease);
 }
 .timeline-label span{
   font-size:.78rem;color:var(--text-muted);white-space:nowrap;
@@ -573,6 +578,7 @@ li{margin-bottom:10px}
   background:var(--gold);
   box-shadow:0 0 0 4px rgba(212,160,23,.2);
 }
+.timeline-node.is-ai-milestone:hover .timeline-dot{box-shadow:0 0 0 6px rgba(212,160,23,.28)}
 .timeline-badge{
   margin-top:8px;
   font-size:.72rem;font-weight:700;
@@ -582,6 +588,15 @@ li{margin-bottom:10px}
   padding:4px 9px;
   border-radius:999px;
   white-space:nowrap;
+}
+
+/* Brief highlight flash on the experience card a timeline node points to */
+.experience-card.is-jump-target{
+  animation:jump-highlight 1.4s ease-out;
+}
+@keyframes jump-highlight{
+  0%{ box-shadow:0 0 0 4px rgba(212,160,23,.55), var(--shadow-sm); }
+  100%{ box-shadow:var(--shadow-sm); }
 }
 
 /* ---------- AI in My Workflow ---------------------------------------------- */
@@ -760,6 +775,5 @@ footer p{color:var(--text-muted);font-size:.92rem}
   .workflow-compare{flex-direction:column}
   .workflow-arrow{transform:rotate(90deg);margin:-4px auto}
   .notebook h2{font-size:1.7rem}
-  .pen-deco{width:100px;right:10%;bottom:2px}
   .paperclip-deco{width:36px;height:36px;right:18px;top:-16px}
 }

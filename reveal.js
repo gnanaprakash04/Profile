@@ -200,4 +200,33 @@
       }
     });
   }
+
+  // ---------------------------------------------------------------------
+  // Career Timeline → Experience list linking. Clicking a timeline node
+  // opens the matching role below, scrolls it into view, and gives it a
+  // brief highlight so the connection is obvious.
+  // ---------------------------------------------------------------------
+  var timelineNodes = document.querySelectorAll('.timeline-node[data-target]');
+  timelineNodes.forEach(function (node) {
+    node.addEventListener('click', function () {
+      var target = document.getElementById(node.getAttribute('data-target'));
+      if (!target) return;
+
+      // Close any other open card so the one you picked stands out.
+      document.querySelectorAll('.experience-card[open]').forEach(function (openCard) {
+        if (openCard !== target) openCard.removeAttribute('open');
+      });
+
+      target.setAttribute('open', '');
+      target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+
+      target.classList.add('is-jump-target');
+      setTimeout(function () {
+        target.classList.remove('is-jump-target');
+      }, 1400);
+
+      timelineNodes.forEach(function (n) { n.classList.remove('is-active-target'); });
+      node.classList.add('is-active-target');
+    });
+  });
 })();

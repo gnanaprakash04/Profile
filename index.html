@@ -112,13 +112,6 @@ Support teams to deliver clear, accurate, and user-focused documentation.
 
 <p>Genuinely curious about emerging tools and technologies, with a track record of quickly adopting and applying them — from integrating Generative AI into documentation workflows to exploring docs-as-code practices — to keep pace with evolving product and industry standards.</p>
 
-            <svg class="pen-deco" viewBox="0 0 170 32" aria-hidden="true">
-                <rect x="8" y="11" width="128" height="10" rx="5" class="pen-body"/>
-                <rect x="8" y="11" width="20" height="10" rx="5" class="pen-band"/>
-                <polygon points="136,11 158,16 136,21" class="pen-band"/>
-                <circle cx="159" cy="16" r="2.2" class="pen-tip"/>
-            </svg>
-
         </div>
 
     </section>
@@ -171,35 +164,36 @@ Support teams to deliver clear, accurate, and user-focused documentation.
 
     <h2>Professional Experience</h2>
 
-    <div class="career-timeline" aria-label="Career timeline, 2011 to present">
+    <div class="career-timeline" aria-label="Career timeline, 2011 to present. Select a point to jump to that role below.">
         <div class="timeline-track">
-            <div class="timeline-node">
+            <button type="button" class="timeline-node" data-target="exp-capgemini">
                 <span class="timeline-dot"></span>
                 <div class="timeline-label"><strong>2011</strong><span>Capgemini</span></div>
-            </div>
-            <div class="timeline-node">
+            </button>
+            <button type="button" class="timeline-node" data-target="exp-innovatia">
                 <span class="timeline-dot"></span>
                 <div class="timeline-label"><strong>2019</strong><span>Innovatia</span></div>
-            </div>
-            <div class="timeline-node">
+            </button>
+            <button type="button" class="timeline-node" data-target="exp-cambium-1">
                 <span class="timeline-dot"></span>
                 <div class="timeline-label"><strong>2019</strong><span>Cambium Networks</span></div>
-            </div>
-            <div class="timeline-node">
+            </button>
+            <button type="button" class="timeline-node" data-target="exp-nokia">
                 <span class="timeline-dot"></span>
                 <div class="timeline-label"><strong>2023</strong><span>Nokia</span></div>
-            </div>
-            <div class="timeline-node is-ai-milestone">
+            </button>
+            <button type="button" class="timeline-node is-ai-milestone" data-target="exp-cambium-2">
                 <span class="timeline-dot"></span>
                 <div class="timeline-label"><strong>2024</strong><span>Cambium Networks</span></div>
                 <div class="timeline-badge">✨ AI-augmented workflows begin</div>
-            </div>
+            </button>
         </div>
     </div>
+    <p class="timeline-hint">Click a point above to jump to that role</p>
 
     <div class="experience-container">
 
-       <details class="experience-card">
+       <details class="experience-card" id="exp-cambium-2">
             <summary><!--<img src="images/cambium-logo.png" class="company-logo" alt="Cambium Networks">-->
 
            <div class="company-info"><h3>Cambium Networks</h3>
@@ -227,7 +221,7 @@ and support technical research and editing.</li>
 
         </details>
 
-        <details class="experience-card">
+        <details class="experience-card" id="exp-nokia">
             <summary><!--<img src="images/Nokia.png" class="company-logo" alt="Nokia">-->
 
            <div class="company-info">
@@ -248,7 +242,7 @@ accurate documentation.</li>
             </ul>
 
         </details>
-         <details class="experience-card">
+         <details class="experience-card" id="exp-cambium-1">
  <summary><!--<img src="images/cambium-logo.png" class="company-logo" alt="Cambium Networks">-->
 
            <div class="company-info">
@@ -270,7 +264,7 @@ accurate documentation.</li>
 
         </details>
 
-        <details class="experience-card">
+        <details class="experience-card" id="exp-innovatia">
            <summary><!--<img src="images/Innovatia.png" class="company-logo" alt="Innovatia India Pvt Ltd">-->
            <div class="company-info">
             <h3>Innovatia India Pvt Ltd</h3>
@@ -290,7 +284,7 @@ accurate documentation.</li>
 
         </details>
 
-        <details class="experience-card">
+        <details class="experience-card" id="exp-capgemini">
  <summary><!--<img src="images/Capgemini.png" class="company-logo" alt="Capgemini">-->
 <div class="company-info">
     <h3>Capgemini</h3>
