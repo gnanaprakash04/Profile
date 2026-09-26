@@ -164,56 +164,70 @@ Support teams to deliver clear, accurate, and user-focused documentation.
 
     <h2>Professional Experience</h2>
 
-    <div class="career-timeline" aria-label="Career timeline, 2011 to present. Select an entry to jump to that role below.">
-        <div class="timeline-line" aria-hidden="true"></div>
-
-        <button type="button" class="timeline-node timeline-node--left" data-target="exp-capgemini">
-            <span class="timeline-dot"></span>
-            <div class="timeline-label">
-                <strong>2011</strong>
-                <span>Capgemini</span>
-                <em>Technical Writer</em>
-            </div>
-        </button>
-
-        <button type="button" class="timeline-node timeline-node--right" data-target="exp-innovatia">
-            <span class="timeline-dot"></span>
-            <div class="timeline-label">
-                <strong>2019</strong>
-                <span>Innovatia India Pvt Ltd</span>
-                <em>Technical Writer</em>
-            </div>
-        </button>
-
-        <button type="button" class="timeline-node timeline-node--left" data-target="exp-cambium-1">
-            <span class="timeline-dot"></span>
-            <div class="timeline-label">
-                <strong>2019 – 2023</strong>
-                <span>Cambium Networks</span>
-                <em>Senior Technical Writer</em>
-            </div>
-        </button>
-
-        <button type="button" class="timeline-node timeline-node--right" data-target="exp-nokia">
-            <span class="timeline-dot"></span>
-            <div class="timeline-label">
-                <strong>2023</strong>
-                <span>Nokia</span>
-                <em>Customer Documentation Developer</em>
-            </div>
-        </button>
-
-        <button type="button" class="timeline-node timeline-node--left is-ai-milestone" data-target="exp-cambium-2">
-            <span class="timeline-dot"></span>
-            <div class="timeline-label">
-                <strong>2024 – Present</strong>
-                <span>Cambium Networks</span>
-                <em>Senior Technical Writer</em>
+    <div class="career-timeline" aria-label="Career timeline, 2011 to present. Select a point to see that stage of the journey below.">
+        <div class="timeline-track">
+            <button type="button" class="timeline-node" data-target="stage-1" data-chip="chip-capgemini">
+                <span class="timeline-dot"></span>
+                <div class="timeline-label"><strong>2011</strong><span>Capgemini</span></div>
+            </button>
+            <button type="button" class="timeline-node" data-target="stage-1" data-chip="chip-innovatia">
+                <span class="timeline-dot"></span>
+                <div class="timeline-label"><strong>2019</strong><span>Innovatia</span></div>
+            </button>
+            <button type="button" class="timeline-node" data-target="stage-2" data-chip="chip-cambium-1">
+                <span class="timeline-dot"></span>
+                <div class="timeline-label"><strong>2019 – 23</strong><span>Cambium Networks</span></div>
+            </button>
+            <button type="button" class="timeline-node" data-target="stage-3" data-chip="chip-nokia">
+                <span class="timeline-dot"></span>
+                <div class="timeline-label"><strong>2023</strong><span>Nokia</span></div>
+            </button>
+            <button type="button" class="timeline-node is-ai-milestone" data-target="stage-3" data-chip="chip-cambium-2">
+                <span class="timeline-dot"></span>
+                <div class="timeline-label"><strong>2024</strong><span>Cambium Networks</span></div>
                 <div class="timeline-badge">✨ AI-augmented workflows begin</div>
-            </div>
-        </button>
+            </button>
+        </div>
     </div>
-    <p class="timeline-hint">Click any point on the timeline to jump to that role</p>
+    <p class="timeline-hint">Click any point on the timeline to see that stage of my journey below</p>
+
+    <!-- A growth narrative instead of a flat, resume-style job list — the
+         same 15 years, told as a progression rather than repeated bullets. -->
+    <div class="growth-journey">
+
+        <div class="growth-stage" id="stage-1">
+            <span class="growth-stage-label">Stage 1 · 2011 – 2019</span>
+            <h3>Learning the Craft</h3>
+            <p>I started in structured authoring, learning how to turn dense engineering specs into manuals and parts catalogues that field technicians could actually use. Moving into DITA/XML-based authoring and migrating legacy Word documentation into structured, reusable content taught me early on that good documentation is less about writing well and more about understanding the reader's problem well.</p>
+            <div class="growth-chips">
+                <button type="button" class="growth-chip" id="chip-capgemini" data-open-target="exp-capgemini">Capgemini — Technical Writer</button>
+                <button type="button" class="growth-chip" id="chip-innovatia" data-open-target="exp-innovatia">Innovatia — Technical Writer</button>
+            </div>
+        </div>
+
+        <div class="growth-stage" id="stage-2">
+            <span class="growth-stage-label">Stage 2 · 2019 – 2023</span>
+            <h3>Building Expertise</h3>
+            <p>Over three and a half years documenting NMS platforms end-to-end at Cambium Networks, I moved from writing individual guides to owning documentation strategy — streamlining publishing workflows enough to cut release documentation time by 30%, and taking on the UI/UX side of writing as the products grew more complex.</p>
+            <div class="growth-chips">
+                <button type="button" class="growth-chip" id="chip-cambium-1" data-open-target="exp-cambium-1">Cambium Networks — Senior Technical Writer</button>
+            </div>
+        </div>
+
+        <div class="growth-stage is-ai-stage" id="stage-3">
+            <span class="growth-stage-label">Stage 3 · 2023 – Present</span>
+            <h3>Leading &amp; Modernizing with AI</h3>
+            <p>The last two roles have been less about writing more and more about writing smarter: leading documentation for a full NMS product suite, exploring docs-as-code with Git and Markdown, and — since 2024 — building Generative AI into the day-to-day workflow to speed up drafting and research without losing the judgment a human writer brings to accuracy and structure.</p>
+            <div class="growth-chips">
+                <button type="button" class="growth-chip" id="chip-nokia" data-open-target="exp-nokia">Nokia — Customer Documentation Developer</button>
+                <button type="button" class="growth-chip" id="chip-cambium-2" data-open-target="exp-cambium-2">Cambium Networks — Senior Technical Writer</button>
+            </div>
+        </div>
+
+    </div>
+
+    <details class="full-history-toggle">
+        <summary>View full role-by-role history</summary>
 
     <div class="experience-container">
 
@@ -330,6 +344,8 @@ accurate documentation.</li>
         </details>
 
     </div>
+
+    </details>
 
 
 </section>

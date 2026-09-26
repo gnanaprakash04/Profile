@@ -202,31 +202,56 @@
   }
 
   // ---------------------------------------------------------------------
-  // Career Timeline → Experience list linking. Clicking a timeline node
-  // opens the matching role below, scrolls it into view, and gives it a
-  // brief highlight so the connection is obvious.
+  // Career Timeline → Growth Journey → full role detail. Three layers,
+  // each one click deeper:
+  //   1. Timeline node  -> scrolls to the growth stage, flashes the chip
+  //   2. Growth chip     -> opens the full-history detail for that role
+  //      (expanding the collapsed wrapper first if needed), scrolls to
+  //      it, and gives it a brief highlight.
   // ---------------------------------------------------------------------
+  function flashHighlight(el) {
+    if (!el) return;
+    el.classList.add('is-jump-target');
+    setTimeout(function () { el.classList.remove('is-jump-target'); }, 1400);
+  }
+
   var timelineNodes = document.querySelectorAll('.timeline-node[data-target]');
   timelineNodes.forEach(function (node) {
     node.addEventListener('click', function () {
-      var target = document.getElementById(node.getAttribute('data-target'));
-      if (!target) return;
+      var stage = document.getElementById(node.getAttribute('data-target'));
+      if (!stage) return;
 
-      // Close any other open card so the one you picked stands out.
-      document.querySelectorAll('.experience-card[open]').forEach(function (openCard) {
-        if (openCard !== target) openCard.removeAttribute('open');
-      });
+      stage.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
 
-      target.setAttribute('open', '');
-      target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
-
-      target.classList.add('is-jump-target');
-      setTimeout(function () {
-        target.classList.remove('is-jump-target');
-      }, 1400);
+      var chip = document.getElementById(node.getAttribute('data-chip'));
+      flashHighlight(chip);
 
       timelineNodes.forEach(function (n) { n.classList.remove('is-active-target'); });
       node.classList.add('is-active-target');
+    });
+  });
+
+  var growthChips = document.querySelectorAll('.growth-chip[data-open-target]');
+  growthChips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var target = document.getElementById(chip.getAttribute('data-open-target'));
+      if (!target) return;
+
+      var wrapper = target.closest('.full-history-toggle');
+      if (wrapper && !wrapper.open) wrapper.open = true;
+
+      document.querySelectorAll('.experience-card[open]').forEach(function (openCard) {
+        if (openCard !== target) openCard.removeAttribute('open');
+      });
+      target.setAttribute('open', '');
+
+      // Give the browser a tick to lay out the now-visible content
+      // before measuring where to scroll to.
+      setTimeout(function () {
+        target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      }, 20);
+
+      flashHighlight(target);
     });
   });
 })();
