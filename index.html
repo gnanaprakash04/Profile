@@ -164,41 +164,26 @@ Support teams to deliver clear, accurate, and user-focused documentation.
 
     <h2>Professional Experience</h2>
 
-    <div class="timeline-connector-wrap" id="timeline-connector-wrap">
+    <p class="timeline-hint">Click a point on the timeline, or a company name, to see the details</p>
 
-        <svg class="timeline-connectors" id="timeline-connectors" aria-hidden="true"></svg>
+    <!-- Vertical timeline on the left; each point has an arrow pointing to
+         the stage it belongs to. Stages tell the same 15 years as a
+         progression instead of repeating resume bullets. -->
+    <div class="exp-layout">
 
-        <p class="timeline-hint">Click any point on the timeline, or a company name below, to see the details</p>
-
-        <div class="career-timeline" aria-label="Career timeline, 2011 to present. Select a point to see that stage of the journey below.">
-            <div class="timeline-track">
+        <div class="exp-row" data-stage="stage-1">
+            <div class="exp-timeline-col">
                 <button type="button" class="timeline-node" data-target="stage-1" data-chip="chip-capgemini">
                     <span class="timeline-dot"></span>
-                    <div class="timeline-label"><strong>2011</strong><span>Capgemini</span></div>
+                    <span class="timeline-label"><strong>2011</strong><span>Capgemini</span></span>
+                    <span class="timeline-arrow" aria-hidden="true"></span>
                 </button>
                 <button type="button" class="timeline-node" data-target="stage-1" data-chip="chip-innovatia">
                     <span class="timeline-dot"></span>
-                    <div class="timeline-label"><strong>2019</strong><span>Innovatia</span></div>
-                </button>
-                <button type="button" class="timeline-node" data-target="stage-2" data-chip="chip-cambium-1">
-                    <span class="timeline-dot"></span>
-                    <div class="timeline-label"><strong>2019 – 23</strong><span>Cambium Networks</span></div>
-                </button>
-                <button type="button" class="timeline-node" data-target="stage-3" data-chip="chip-nokia">
-                    <span class="timeline-dot"></span>
-                    <div class="timeline-label"><strong>2023</strong><span>Nokia</span></div>
-                </button>
-                <button type="button" class="timeline-node is-ai-milestone" data-target="stage-3" data-chip="chip-cambium-2">
-                    <span class="timeline-dot"></span>
-                    <div class="timeline-label"><strong>2024</strong><span>Cambium Networks</span></div>
-                    <div class="timeline-badge">✨ AI-augmented workflows begin</div>
+                    <span class="timeline-label"><strong>2019</strong><span>Innovatia</span></span>
+                    <span class="timeline-arrow" aria-hidden="true"></span>
                 </button>
             </div>
-        </div>
-
-        <!-- A growth narrative instead of a flat, resume-style job list — the
-             same 15 years, told as a progression rather than repeated bullets. -->
-        <div class="growth-journey">
 
             <div class="growth-stage" id="stage-1">
                 <span class="growth-stage-label">Stage 1 · 2011 – 2019</span>
@@ -209,6 +194,16 @@ Support teams to deliver clear, accurate, and user-focused documentation.
                     <button type="button" class="growth-chip" id="chip-innovatia" data-role="exp-innovatia">Innovatia — Technical Writer</button>
                 </div>
             </div>
+        </div>
+
+        <div class="exp-row" data-stage="stage-2">
+            <div class="exp-timeline-col">
+                <button type="button" class="timeline-node" data-target="stage-2" data-chip="chip-cambium-1">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-label"><strong>2019 – 23</strong><span>Cambium Networks</span></span>
+                    <span class="timeline-arrow" aria-hidden="true"></span>
+                </button>
+            </div>
 
             <div class="growth-stage" id="stage-2">
                 <span class="growth-stage-label">Stage 2 · 2019 – 2023</span>
@@ -217,6 +212,24 @@ Support teams to deliver clear, accurate, and user-focused documentation.
                 <div class="growth-chips">
                     <button type="button" class="growth-chip" id="chip-cambium-1" data-role="exp-cambium-1">Cambium Networks — Senior Technical Writer</button>
                 </div>
+            </div>
+        </div>
+
+        <div class="exp-row" data-stage="stage-3">
+            <div class="exp-timeline-col">
+                <button type="button" class="timeline-node" data-target="stage-3" data-chip="chip-nokia">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-label"><strong>2023</strong><span>Nokia</span></span>
+                    <span class="timeline-arrow" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="timeline-node is-ai-milestone" data-target="stage-3" data-chip="chip-cambium-2">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-label">
+                        <strong>2024</strong><span>Cambium Networks</span>
+                        <span class="timeline-badge">✨ AI-augmented workflows begin</span>
+                    </span>
+                    <span class="timeline-arrow" aria-hidden="true"></span>
+                </button>
             </div>
 
             <div class="growth-stage is-ai-stage" id="stage-3">
@@ -228,7 +241,6 @@ Support teams to deliver clear, accurate, and user-focused documentation.
                     <button type="button" class="growth-chip" id="chip-cambium-2" data-role="exp-cambium-2">Cambium Networks — Senior Technical Writer</button>
                 </div>
             </div>
-
         </div>
 
     </div>
