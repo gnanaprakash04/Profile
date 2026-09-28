@@ -164,132 +164,120 @@ Support teams to deliver clear, accurate, and user-focused documentation.
 
     <h2>Professional Experience</h2>
 
-    <div class="career-timeline" aria-label="Career timeline, 2011 to present. Select a point to see that stage of the journey below.">
-        <div class="timeline-track">
-            <button type="button" class="timeline-node" data-target="stage-1" data-chip="chip-capgemini">
-                <span class="timeline-dot"></span>
-                <div class="timeline-label"><strong>2011</strong><span>Capgemini</span></div>
-            </button>
-            <button type="button" class="timeline-node" data-target="stage-1" data-chip="chip-innovatia">
-                <span class="timeline-dot"></span>
-                <div class="timeline-label"><strong>2019</strong><span>Innovatia</span></div>
-            </button>
-            <button type="button" class="timeline-node" data-target="stage-2" data-chip="chip-cambium-1">
-                <span class="timeline-dot"></span>
-                <div class="timeline-label"><strong>2019 – 23</strong><span>Cambium Networks</span></div>
-            </button>
-            <button type="button" class="timeline-node" data-target="stage-3" data-chip="chip-nokia">
-                <span class="timeline-dot"></span>
-                <div class="timeline-label"><strong>2023</strong><span>Nokia</span></div>
-            </button>
-            <button type="button" class="timeline-node is-ai-milestone" data-target="stage-3" data-chip="chip-cambium-2">
-                <span class="timeline-dot"></span>
-                <div class="timeline-label"><strong>2024</strong><span>Cambium Networks</span></div>
-                <div class="timeline-badge">✨ AI-augmented workflows begin</div>
-            </button>
+    <div class="timeline-connector-wrap" id="timeline-connector-wrap">
+
+        <svg class="timeline-connectors" id="timeline-connectors" aria-hidden="true"></svg>
+
+        <p class="timeline-hint">Click any point on the timeline, or a company name below, to see the details</p>
+
+        <div class="career-timeline" aria-label="Career timeline, 2011 to present. Select a point to see that stage of the journey below.">
+            <div class="timeline-track">
+                <button type="button" class="timeline-node" data-target="stage-1" data-chip="chip-capgemini">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-label"><strong>2011</strong><span>Capgemini</span></div>
+                </button>
+                <button type="button" class="timeline-node" data-target="stage-1" data-chip="chip-innovatia">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-label"><strong>2019</strong><span>Innovatia</span></div>
+                </button>
+                <button type="button" class="timeline-node" data-target="stage-2" data-chip="chip-cambium-1">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-label"><strong>2019 – 23</strong><span>Cambium Networks</span></div>
+                </button>
+                <button type="button" class="timeline-node" data-target="stage-3" data-chip="chip-nokia">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-label"><strong>2023</strong><span>Nokia</span></div>
+                </button>
+                <button type="button" class="timeline-node is-ai-milestone" data-target="stage-3" data-chip="chip-cambium-2">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-label"><strong>2024</strong><span>Cambium Networks</span></div>
+                    <div class="timeline-badge">✨ AI-augmented workflows begin</div>
+                </button>
+            </div>
         </div>
+
+        <!-- A growth narrative instead of a flat, resume-style job list — the
+             same 15 years, told as a progression rather than repeated bullets. -->
+        <div class="growth-journey">
+
+            <div class="growth-stage" id="stage-1">
+                <span class="growth-stage-label">Stage 1 · 2011 – 2019</span>
+                <h3>Learning the Craft</h3>
+                <p>I started in structured authoring, learning how to turn dense engineering specs into manuals and parts catalogues that field technicians could actually use. Moving into DITA/XML-based authoring and migrating legacy Word documentation into structured, reusable content taught me early on that good documentation is less about writing well and more about understanding the reader's problem well.</p>
+                <div class="growth-chips">
+                    <button type="button" class="growth-chip" id="chip-capgemini" data-role="exp-capgemini">Capgemini — Technical Writer</button>
+                    <button type="button" class="growth-chip" id="chip-innovatia" data-role="exp-innovatia">Innovatia — Technical Writer</button>
+                </div>
+            </div>
+
+            <div class="growth-stage" id="stage-2">
+                <span class="growth-stage-label">Stage 2 · 2019 – 2023</span>
+                <h3>Building Expertise</h3>
+                <p>Over three and a half years documenting NMS platforms end-to-end at Cambium Networks, I moved from writing individual guides to owning documentation strategy — streamlining publishing workflows enough to cut release documentation time by 30%, and taking on the UI/UX side of writing as the products grew more complex.</p>
+                <div class="growth-chips">
+                    <button type="button" class="growth-chip" id="chip-cambium-1" data-role="exp-cambium-1">Cambium Networks — Senior Technical Writer</button>
+                </div>
+            </div>
+
+            <div class="growth-stage is-ai-stage" id="stage-3">
+                <span class="growth-stage-label">Stage 3 · 2023 – Present</span>
+                <h3>Leading &amp; Modernizing with AI</h3>
+                <p>The last two roles have been less about writing more and more about writing smarter: leading documentation for a full NMS product suite, exploring docs-as-code with Git and Markdown, and — since 2024 — building Generative AI into the day-to-day workflow to speed up drafting and research without losing the judgment a human writer brings to accuracy and structure.</p>
+                <div class="growth-chips">
+                    <button type="button" class="growth-chip" id="chip-nokia" data-role="exp-nokia">Nokia — Customer Documentation Developer</button>
+                    <button type="button" class="growth-chip" id="chip-cambium-2" data-role="exp-cambium-2">Cambium Networks — Senior Technical Writer</button>
+                </div>
+            </div>
+
+        </div>
+
     </div>
-    <p class="timeline-hint">Click any point on the timeline to see that stage of my journey below</p>
 
-    <!-- A growth narrative instead of a flat, resume-style job list — the
-         same 15 years, told as a progression rather than repeated bullets. -->
-    <div class="growth-journey">
+    <!-- Hidden data source for the role-detail popup — not rendered on the
+         page; JS reads this and injects it into the modal when a company
+         name is clicked. Keeps the full detail available without it being
+         a big visible list on the page. -->
+    <div id="role-detail-source" hidden>
 
-        <div class="growth-stage" id="stage-1">
-            <span class="growth-stage-label">Stage 1 · 2011 – 2019</span>
-            <h3>Learning the Craft</h3>
-            <p>I started in structured authoring, learning how to turn dense engineering specs into manuals and parts catalogues that field technicians could actually use. Moving into DITA/XML-based authoring and migrating legacy Word documentation into structured, reusable content taught me early on that good documentation is less about writing well and more about understanding the reader's problem well.</p>
-            <div class="growth-chips">
-                <button type="button" class="growth-chip" id="chip-capgemini" data-open-target="exp-capgemini">Capgemini — Technical Writer</button>
-                <button type="button" class="growth-chip" id="chip-innovatia" data-open-target="exp-innovatia">Innovatia — Technical Writer</button>
-            </div>
-        </div>
-
-        <div class="growth-stage" id="stage-2">
-            <span class="growth-stage-label">Stage 2 · 2019 – 2023</span>
-            <h3>Building Expertise</h3>
-            <p>Over three and a half years documenting NMS platforms end-to-end at Cambium Networks, I moved from writing individual guides to owning documentation strategy — streamlining publishing workflows enough to cut release documentation time by 30%, and taking on the UI/UX side of writing as the products grew more complex.</p>
-            <div class="growth-chips">
-                <button type="button" class="growth-chip" id="chip-cambium-1" data-open-target="exp-cambium-1">Cambium Networks — Senior Technical Writer</button>
-            </div>
-        </div>
-
-        <div class="growth-stage is-ai-stage" id="stage-3">
-            <span class="growth-stage-label">Stage 3 · 2023 – Present</span>
-            <h3>Leading &amp; Modernizing with AI</h3>
-            <p>The last two roles have been less about writing more and more about writing smarter: leading documentation for a full NMS product suite, exploring docs-as-code with Git and Markdown, and — since 2024 — building Generative AI into the day-to-day workflow to speed up drafting and research without losing the judgment a human writer brings to accuracy and structure.</p>
-            <div class="growth-chips">
-                <button type="button" class="growth-chip" id="chip-nokia" data-open-target="exp-nokia">Nokia — Customer Documentation Developer</button>
-                <button type="button" class="growth-chip" id="chip-cambium-2" data-open-target="exp-cambium-2">Cambium Networks — Senior Technical Writer</button>
-            </div>
-        </div>
-
-    </div>
-
-    <details class="full-history-toggle">
-        <summary>View full role-by-role history</summary>
-
-    <div class="experience-container">
-
-       <details class="experience-card" id="exp-cambium-2">
-            <summary><!--<img src="images/cambium-logo.png" class="company-logo" alt="Cambium Networks">-->
-
-           <div class="company-info"><h3>Cambium Networks</h3>
-
+        <div class="role-data" id="exp-cambium-2">
+            <h3>Cambium Networks</h3>
             <h4>Senior Technical Writer</h4>
-
-            <p class="date">May 2024 – Present</p></div> </summary>
-            
-<p>Project: Telecom & Networking Products – Technical documentation for wireless, fiber, and network management solutions, including cnMaestro, cnWave, Fiber, ePMP, and PTP.</p>
+            <p class="date">May 2024 – Present</p>
+            <p>Project: Telecom &amp; Networking Products – Technical documentation for wireless, fiber, and network management solutions, including cnMaestro, cnWave, Fiber, ePMP, and PTP.</p>
             <ul>
                 <li>Lead end-to-end documentation for cnMaestro Cloud and On-Premises NMS, developing user guides, API documentation, release notes, data sheets, and leaflets using docs-as-code practices to ensure high-quality, accurate, and timely deliverables.</li>
-<li>Participate in Agile and Scrum meetings and collaborate with cross-functional teams to gather, validate, and align documentation with development cycles.</li>           
-<li>Create, manage, and assign work through JIRA, track feedback, monitor blockers, and drive change management
-activities.</li>  
-<li>Create and maintain user guides and context-sensitive online help (CSH) systems using structured authoring (DITA and
-XML), ensuring style compliance, accuracy, and alignment with new product developments and updates.</li>
-<li>Design, localize, and review multilingual product leaflets using Adobe Creative Cloud, InDesign, and Illustrator.</li>
-<li>Conduct peer reviews, thoroughly testing documentation to ensure accuracy, completeness, consistency, and alignment with platform functionality.</li>
-<li>Maintain version control by branching and managing XML files in the Madcap Flare Central CMS across multiple releases.</li>                
-<li>Integrated Generative AI tools into the documentation workflow to accelerate authoring, improve content consistency,
-and support technical research and editing.</li>
-<li>Explore Markdown and docs-as-code workflows using Visual Studio Code and GitHub to evaluate modern, version-controlled approaches to technical documentation.</li>
- <li>Create training plans and materials to support knowledge transfer for new hires.</li>              
+                <li>Participate in Agile and Scrum meetings and collaborate with cross-functional teams to gather, validate, and align documentation with development cycles.</li>
+                <li>Create, manage, and assign work through JIRA, track feedback, monitor blockers, and drive change management activities.</li>
+                <li>Create and maintain user guides and context-sensitive online help (CSH) systems using structured authoring (DITA and XML), ensuring style compliance, accuracy, and alignment with new product developments and updates.</li>
+                <li>Design, localize, and review multilingual product leaflets using Adobe Creative Cloud, InDesign, and Illustrator.</li>
+                <li>Conduct peer reviews, thoroughly testing documentation to ensure accuracy, completeness, consistency, and alignment with platform functionality.</li>
+                <li>Maintain version control by branching and managing XML files in the Madcap Flare Central CMS across multiple releases.</li>
+                <li>Integrated Generative AI tools into the documentation workflow to accelerate authoring, improve content consistency, and support technical research and editing.</li>
+                <li>Explore Markdown and docs-as-code workflows using Visual Studio Code and GitHub to evaluate modern, version-controlled approaches to technical documentation.</li>
+                <li>Create training plans and materials to support knowledge transfer for new hires.</li>
             </ul>
+        </div>
 
-        </details>
-
-        <details class="experience-card" id="exp-nokia">
-            <summary><!--<img src="images/Nokia.png" class="company-logo" alt="Nokia">-->
-
-           <div class="company-info">
+        <div class="role-data" id="exp-nokia">
             <h3>Nokia</h3>
-
             <h4>Customer Documentation Developer</h4>
-
-            <p class="date">Feb 2023 – May 2024</p></div> </summary>
-<P>Project: WaveSuite – A software suite that enables automation, optimization, and assurance for networks, streamlining service delivery and operational efficiency.</P>
+            <p class="date">Feb 2023 – May 2024</p>
+            <p>Project: WaveSuite – A software suite that enables automation, optimization, and assurance for networks, streamlining service delivery and operational efficiency.</p>
             <ul>
                 <li>Created and updated user and installation guides and release notes for WaveSuite products in alignment with Nokia standards.</li>
-                <li>Collaborated with SMEs, testers, and product owners in an Agile environment to analyse requirements and deliver
-accurate documentation.</li>
+                <li>Collaborated with SMEs, testers, and product owners in an Agile environment to analyse requirements and deliver accurate documentation.</li>
                 <li>Managed Arbortext XML file branches in CMS for releases and version control.</li>
                 <li>Developed feature video scripts and produced product demonstration videos using Camtasia.</li>
                 <li>Contributed to the Online Help (OLH) team, building and publishing OLH content in line with release cycles using FileZilla and PuTTY.</li>
                 <li>Integrated customer feedback from surveys into documentation improvements, enhancing clarity and usability.</li>
             </ul>
+        </div>
 
-        </details>
-         <details class="experience-card" id="exp-cambium-1">
- <summary><!--<img src="images/cambium-logo.png" class="company-logo" alt="Cambium Networks">-->
-
-           <div class="company-info">
+        <div class="role-data" id="exp-cambium-1">
             <h3>Cambium Networks</h3>
-
             <h4>Senior Technical Writer</h4>
-
-            <p class="date">Oct 2019 – Feb 2023</p></div> </summary>
-<P>Project: Cloud and on-premises NMS suite – A software suite designed to simplify networking deployment, management, and optimization.</P>
+            <p class="date">Oct 2019 – Feb 2023</p>
+            <p>Project: Cloud and on-premises NMS suite – A software suite designed to simplify networking deployment, management, and optimization.</p>
             <ul>
                 <li>Led the migration of cnMaestro documentation into Madcap Flare, improving usability and user experience.</li>
                 <li>Developed user guides and release notes for the new NMS GUI of the NSE product, focusing on the UI/UX interface.</li>
@@ -299,18 +287,13 @@ accurate documentation.</li>
                 <li>Interacted with geographically distributed development and marketing teams to understand user requirements.</li>
                 <li>Actively contributed ideas to improve documentation processes and content quality.</li>
             </ul>
+        </div>
 
-        </details>
-
-        <details class="experience-card" id="exp-innovatia">
-           <summary><!--<img src="images/Innovatia.png" class="company-logo" alt="Innovatia India Pvt Ltd">-->
-           <div class="company-info">
+        <div class="role-data" id="exp-innovatia">
             <h3>Innovatia India Pvt Ltd</h3>
-
             <h4>Technical Writer</h4>
-
-            <p class="date">Feb 2019 – Sep 2019</p></div> </summary> 
-<p>Project: Noregon (JPRO software) – Streamlines diagnostics and troubleshooting for vehicle repairs.</p>
+            <p class="date">Feb 2019 – Sep 2019</p>
+            <p>Project: Noregon (JPRO software) – Streamlines diagnostics and troubleshooting for vehicle repairs.</p>
             <ul>
                 <li>Migrated content from Word to DITA XML, improving structure, consistency, and reuse across documents.</li>
                 <li>Created and maintained user guides and release notes for JPRO software using Oxygen XML Editor, working closely with SMEs and developers.</li>
@@ -319,20 +302,13 @@ accurate documentation.</li>
                 <li>Calculated estimated completion timelines and communicated delivery dates to stakeholders.</li>
                 <li>Trained new hires on technical publication processes and DITA best practices.</li>
             </ul>
+        </div>
 
-        </details>
-
-        <details class="experience-card" id="exp-capgemini">
- <summary><!--<img src="images/Capgemini.png" class="company-logo" alt="Capgemini">-->
-<div class="company-info">
-    <h3>Capgemini</h3>
-
+        <div class="role-data" id="exp-capgemini">
+            <h3>Capgemini</h3>
             <h4>Technical Writer</h4>
-
-            <p class="date">Aug 2011 – Feb 2019</p></div>
-            </summary>
- <p>Project: Bombardier – Provides software solutions to optimize safety, efficiency, and performance in transportation systems.</p>         
-
+            <p class="date">Aug 2011 – Feb 2019</p>
+            <p>Project: Bombardier – Provides software solutions to optimize safety, efficiency, and performance in transportation systems.</p>
             <ul>
                 <li>Authored and revised the Component Maintenance Manual and Illustrated Parts Catalogue using Arbortext Editor, by analyzing service bulletins and technical documents and coordinating with the engineering team.</li>
                 <li>Reviewed peer-authored documents, proofreading and editing content for accuracy and consistency.</li>
@@ -340,12 +316,10 @@ accurate documentation.</li>
                 <li>Collaborated with cross-functional teams to incorporate feature updates.</li>
                 <li>Organized team efforts to meet delivery targets and maintained ownership of documentation outcomes.</li>
             </ul>
-
-        </details>
+        </div>
 
     </div>
 
-    </details>
 
 
 </section>
@@ -519,8 +493,8 @@ This document provides detailed information about the Fiber OLT and ONT products
 
 </div>
 
-<!--</section>
-<section class="knowledge reveal" id="knowledge">
+</section>
+<!--<section class="knowledge reveal" id="knowledge">
 
     <h2>Knowledge Base</h2>
     <p class="kb-intro">A working library of guides, references, and notes I've used while learning — shared here in case they help you too.</p>
@@ -611,6 +585,14 @@ This document provides detailed information about the Fiber OLT and ONT products
     <p>© 2026 All Rights Reserved</p>
 
 </footer>
+
+<!-- Role detail popup (kept at page level so it isn't affected by section transforms) -->
+<div class="role-modal-overlay" id="role-modal-overlay" hidden>
+    <div class="role-modal" role="dialog" aria-modal="true" aria-labelledby="role-modal-company">
+        <button type="button" class="role-modal-close" id="role-modal-close" aria-label="Close">✕</button>
+        <div class="role-modal-body" id="role-modal-body"></div>
+    </div>
+</div>
 
 <script src="reveal.js"></script>
 </body>

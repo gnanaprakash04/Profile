@@ -47,7 +47,7 @@ html.custom-cursor-active *{
   top:0;left:0;
   width:22px;height:22px;
   pointer-events:none;
-  z-index:9999;
+  z-index:20000;
   transform:translate(-100px,-100px);
   transition:transform .12s ease-out, opacity .15s ease;
   opacity:0;
@@ -637,33 +637,107 @@ li{margin-bottom:10px}
 .growth-chip:hover{background:#DCEEE0;transform:translateY(-2px)}
 .growth-chip.is-jump-target{animation:jump-highlight 1.4s ease-out}
 
-/* ---------- Full role-by-role history (collapsed by default) --------------- */
-.full-history-toggle{
-  max-width:900px;margin:0 auto;
-  background:transparent;
+/* ---------- Timeline → stage connector lines --------------------------------- */
+.timeline-connector-wrap{position:relative}
+.timeline-connectors{
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:100%;
+  pointer-events:none;
+  z-index:0;
+  overflow:visible;
 }
-.full-history-toggle > summary{
-  cursor:pointer;
-  list-style:none;
-  text-align:center;
-  font-family:var(--font-head);
-  font-weight:600;font-size:.92rem;
-  color:var(--green-deep);
-  padding:10px;
-  display:flex;align-items:center;justify-content:center;gap:8px;
+.timeline-connectors path{
+  fill:none;
+  stroke:var(--green);
+  stroke-width:1.6;
+  stroke-linecap:round;
+  opacity:.45;
+  stroke-dasharray:6 5;
+  transition:opacity .25s var(--ease), stroke-width .25s var(--ease);
 }
-.full-history-toggle > summary::-webkit-details-marker{display:none}
-.full-history-toggle > summary::after{
-  content:"❯";font-size:14px;color:var(--gold);
+.timeline-connectors path.is-ai-path{stroke:var(--gold);opacity:.7}
+.timeline-connectors path.is-active{opacity:1;stroke-width:2.4;stroke-dasharray:none}
+.timeline-connectors circle{fill:var(--green);opacity:.55}
+.timeline-connectors circle.is-ai-path{fill:var(--gold);opacity:.85}
+.career-timeline,.timeline-hint,.growth-journey{position:relative;z-index:1}
+.timeline-hint{margin:0 0 26px}
+.timeline-connector-wrap .career-timeline{margin-bottom:104px}
+
+/* ---------- Role detail popup ------------------------------------------------- */
+.role-modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(27,67,50,.55);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  z-index:10000;
+  opacity:0;
+  transition:opacity .25s ease;
+}
+.role-modal-overlay[hidden]{display:none}
+.role-modal-overlay.is-open{opacity:1}
+.role-modal{
+  position:relative;
+  width:100%;max-width:640px;
+  max-height:82vh;
+  background:var(--surface);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-lg);
+  border-top:5px solid var(--gold);
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  transform:translateY(16px) scale(.97);
   transition:transform .3s var(--ease);
 }
-.full-history-toggle[open] > summary::after{transform:rotate(90deg)}
-.full-history-toggle .experience-container{margin-top:18px}
-
-/* Brief highlight flash on the experience card / chip a timeline node points to */
-.experience-card.is-jump-target{
-  animation:jump-highlight 1.4s ease-out;
+.role-modal-overlay.is-open .role-modal{transform:translateY(0) scale(1)}
+.role-modal-close{
+  position:absolute;
+  top:12px;right:14px;
+  width:32px;height:32px;
+  border-radius:50%;
+  border:none;
+  background:var(--bg);
+  color:var(--green-dark);
+  font-size:15px;line-height:1;
+  z-index:2;
+  transition:background .2s var(--ease);
 }
+.role-modal-close:hover{background:#DCEEE0}
+.role-modal-body{
+  padding:28px 30px 30px;
+  overflow-y:auto;
+}
+.role-modal-body h3{
+  font-family:var(--font-head);
+  color:var(--green);
+  font-size:1.3rem;
+  margin-bottom:4px;
+  padding-right:36px;
+}
+.role-modal-body h4{
+  font-family:var(--font-head);
+  color:var(--green-dark);
+  font-size:1rem;
+  margin-bottom:4px;
+}
+.role-modal-body .date{margin-bottom:16px}
+.role-modal-body p{
+  font-size:.92rem;
+  color:var(--text-muted);
+  line-height:1.65;
+  margin-bottom:14px;
+}
+.role-modal-body ul{padding-left:20px}
+.role-modal-body li{
+  font-size:.9rem;
+  color:var(--text);
+  line-height:1.65;
+  margin-bottom:9px;
+}
+body.modal-open{overflow:hidden}
+
+/* Brief highlight flash on a chip a timeline node points to */
 @keyframes jump-highlight{
   0%{ box-shadow:0 0 0 4px rgba(212,160,23,.55), var(--shadow-sm); }
   100%{ box-shadow:var(--shadow-sm); }
@@ -885,6 +959,7 @@ footer p{color:var(--text-muted);font-size:.92rem}
   .notebook{margin-left:16px;padding:36px 24px 46px 30px;transform:rotate(0)}
   .notebook::before{left:-14px;width:22px}
   .career-timeline{overflow-x:auto}
+  .timeline-connector-wrap .career-timeline{margin-bottom:24px}
   .timeline-track{min-width:560px}
   .growth-stage{padding:22px 20px}
   .workflow-compare{flex-direction:column}
