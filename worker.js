@@ -26,7 +26,7 @@
  */
 
 // ---- Configuration — EDIT THESE TWO LINES -------------------------------
-const SITE_URL = 'https://gnanaprakash04.github.io/Technical-Writer-Portfolio/';
+const SITE_URL = 'https://gnanaprakash04.github.io/Profile/';
 const ALLOWED_ORIGIN = 'https://gnanaprakash04.github.io';
 // ---------------------------------------------------------------------
 
