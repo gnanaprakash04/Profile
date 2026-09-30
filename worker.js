@@ -31,7 +31,7 @@ const ALLOWED_ORIGIN = 'https://gnanaprakash04.github.io';
 // ---------------------------------------------------------------------
 
 const CONTEXT_CACHE_SECONDS = 3600; // re-fetch site content once an hour
-const MODEL = '@cf/meta/llama-3.1-8b-instruct';
+const MODEL = '@cf/meta/llama-3.1-8b-instruct-fast';
 
 const SYSTEM_PROMPT_PREFIX = `You are a helpful assistant embedded on Gnanaprakash's technical writer portfolio website. You answer visitor questions about his background, skills, experience, and projects, using ONLY the information provided below from his site.
 
@@ -140,8 +140,9 @@ async function handleChat(request, env) {
       ],
     });
   } catch (err) {
+    const detail = (err && err.message) ? err.message : 'unknown error';
     return new Response(
-      JSON.stringify({ error: 'The assistant is temporarily unavailable. Please try again shortly.' }),
+      JSON.stringify({ error: 'The assistant hit an error: ' + detail }),
       { status: 502, headers: { 'Content-Type': 'application/json', ...corsHeaders() } }
     );
   }
