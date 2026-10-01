@@ -2,7 +2,7 @@
 // Talks to the Cloudflare Worker in chatbot/worker.js.
 (function () {
   // ---- EDIT THIS: your deployed Worker URL --------------------------
-  var WORKER_URL = 'https://mute-dew-8908.gnanaprakash04.workers.dev';
+  var WORKER_URL = 'https://portfolio-chatbot.YOUR-SUBDOMAIN.workers.dev';
   // ---------------------------------------------------------------------
 
   var GREETING = "Hi! I'm here to answer questions about Gnanaprakash's background, skills, and experience. What would you like to know?";
@@ -21,7 +21,15 @@
   }
 
   var toggleBtn = el('button', { class: 'chatbot-toggle', 'aria-label': 'Open chat', type: 'button' });
-  toggleBtn.textContent = '💬';
+  toggleBtn.innerHTML =
+    '<svg class="chatbot-icon-chat" viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
+      '<path d="M4 5a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H9.4L5.6 19.4A1 1 0 0 1 4 18.6V16a3 3 0 0 1-2-2.83V8" ' +
+        'stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M8 9.5h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>' +
+    '</svg>' +
+    '<svg class="chatbot-icon-close" viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
+      '<path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>' +
+    '</svg>';
 
   var messagesEl = el('div', { class: 'chatbot-messages' });
 

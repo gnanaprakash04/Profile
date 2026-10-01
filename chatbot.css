@@ -1,24 +1,56 @@
 /* ---------- Portfolio Chatbot Widget ---------------------------------- */
 .chatbot-toggle{
   position:fixed;
-  bottom:24px;right:24px;
-  width:58px;height:58px;
+  bottom:26px;right:26px;
+  width:72px;height:72px;
   border-radius:50%;
-  background:var(--green,#2E7D32);
+  background:linear-gradient(145deg, var(--green,#2E7D32), var(--green-dark,#1B4332));
   color:#fff;
   border:none;
-  box-shadow:0 8px 22px rgba(27,67,50,.28);
+  box-shadow:0 10px 28px rgba(27,67,50,.35), 0 0 0 5px rgba(255,255,255,.55);
   display:flex;align-items:center;justify-content:center;
-  font-size:26px;
   z-index:9998;
-  transition:transform .2s ease, background .2s ease;
+  cursor:pointer;
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease;
 }
-.chatbot-toggle:hover{background:var(--green-deep,#1B5E20);transform:translateY(-3px)}
-.chatbot-toggle.is-open{transform:scale(0.9)}
+.chatbot-toggle::before{
+  content:'';
+  position:absolute;
+  inset:-8px;
+  border-radius:50%;
+  border:2px solid var(--green,#2E7D32);
+  opacity:0;
+  animation:chatbot-pulse 2.6s ease-out infinite;
+}
+.chatbot-toggle:hover{
+  transform:translateY(-4px) scale(1.05);
+  box-shadow:0 14px 34px rgba(27,67,50,.4), 0 0 0 5px rgba(255,255,255,.6);
+}
+.chatbot-toggle.is-open{transform:scale(0.92)}
+.chatbot-toggle.is-open::before{display:none}
+.chatbot-toggle svg{width:30px;height:30px;position:relative;z-index:1}
+.chatbot-toggle .chatbot-icon-close{
+  position:absolute;
+  width:22px;height:22px;
+  opacity:0;transform:scale(.5) rotate(-45deg);
+  transition:opacity .2s ease, transform .2s ease;
+}
+.chatbot-toggle .chatbot-icon-chat{transition:opacity .2s ease, transform .2s ease}
+.chatbot-toggle.is-open .chatbot-icon-chat{opacity:0;transform:scale(.5) rotate(45deg)}
+.chatbot-toggle.is-open .chatbot-icon-close{opacity:1;transform:scale(1) rotate(0)}
+
+@keyframes chatbot-pulse{
+  0%{ transform:scale(1); opacity:.55; }
+  70%{ transform:scale(1.18); opacity:0; }
+  100%{ opacity:0; }
+}
+@media (prefers-reduced-motion: reduce){
+  .chatbot-toggle::before{animation:none;display:none}
+}
 
 .chatbot-panel{
   position:fixed;
-  bottom:92px;right:24px;
+  bottom:110px;right:26px;
   width:340px;
   max-width:calc(100vw - 32px);
   height:460px;
@@ -120,6 +152,7 @@
 .chatbot-send:disabled{opacity:.5;cursor:default}
 
 @media (max-width:480px){
-  .chatbot-panel{right:16px;left:16px;width:auto;bottom:88px}
-  .chatbot-toggle{right:16px}
+  .chatbot-panel{right:16px;left:16px;width:auto;bottom:98px}
+  .chatbot-toggle{right:16px;width:64px;height:64px}
+  .chatbot-toggle svg{width:26px;height:26px}
 }

@@ -135,19 +135,19 @@ nav a:hover::after{transform:scaleX(1)}
   to{opacity:1;transform:translateY(0)}
 }
 
-/* ---------- Notebook hero (name/title/photo/CTA, merged into About) -------- */
-.notebook-hero{
-  display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:40px;
-  margin-bottom:36px;
-  padding-bottom:32px;
-  border-bottom:1px dashed #D7E4DB;
+/* ---------- Notebook grid: bio text (left) runs parallel to photo (right) -- */
+.notebook-grid{
+  display:grid;grid-template-columns:1.3fr .7fr;align-items:start;gap:44px;
 }
-.notebook-hero-content{text-align:left}
+.notebook-left{text-align:left}
+.notebook-left h2{text-align:left;margin-top:28px;padding-top:28px;border-top:1px dashed #D7E4DB}
 
 /* Image sits free of any card — an organic blob crop with a soft color
-   shape behind it, plus a floating stat badge overlapping the corner. */
+   shape behind it, plus a floating stat badge overlapping the corner.
+   Sticky so it stays alongside the bio text while you scroll past it. */
 .hero-image{
-  position:relative;
+  position:sticky;
+  top:100px;
   display:flex;align-items:center;justify-content:center;
   min-height:260px;
 }
@@ -187,7 +187,7 @@ nav a:hover::after{transform:scaleX(1)}
 .hero-badge strong{font-family:var(--font-head);font-size:1.4rem;color:var(--green)}
 .hero-badge span{font-size:.68rem;color:var(--text-muted);font-weight:600;margin-top:2px}
 
-.notebook-hero-content h1{
+.notebook-left h1{
   font-family:'Playfair Display', var(--font-head), serif;
   color:var(--green-dark);margin:0 0 10px;font-size:2.5rem;font-weight:700;
 }
@@ -273,7 +273,7 @@ nav a:hover::after{transform:scaleX(1)}
 
 .notebook h2{
   font-family:'Playfair Display', var(--font-head), serif;
-  text-align:center;
+  text-align:left;
   font-size:2.2rem;
   line-height:1.15;
   color:var(--green-dark);
@@ -936,12 +936,13 @@ footer p{color:var(--text-muted);font-size:.92rem}
   nav.is-scrolled{padding:14px 20px}
   nav ul{flex-direction:column;gap:15px;text-align:center}
   .about,.skills,.experience,.ai-workflow,.projects,.awards,.education,.knowledge,.contact{width:95%}
-  .notebook-hero{grid-template-columns:1fr;text-align:center;gap:24px}
-  .notebook-hero-content{text-align:center}
+  .notebook-grid{grid-template-columns:1fr;text-align:center;gap:24px}
+  .notebook-left{text-align:center}
+  .notebook-left h2{text-align:center}
   .notebook-hero-title{max-width:none;margin-left:auto;margin-right:auto}
-  .notebook-hero-content h1{font-size:2rem}
+  .notebook-left h1{font-size:2rem}
   .notebook-hero-title{font-size:1rem}
-  .hero-image{order:-1;min-height:220px}
+  .hero-image{position:static;order:-1;min-height:220px}
   .hero-image img{max-width:200px}
   .hero-badge{left:50%;transform:translateX(-50%);bottom:-14px}
   .experience-card,.award-card,.contact-card,.project-card,.education-card{width:100%}
