@@ -490,7 +490,7 @@ li{margin-bottom:10px}
 }
 .experience-card li{margin-bottom:12px;line-height:1.8;font-family:var(--font-body)}
 
-/* ---------- Experience: vertical timeline (left) → stages (right) ------------ */
+/* ---------- Career Timeline — horizontal row above the stages ------------- */
 .timeline-hint{
   text-align:center;
   font-size:.78rem;
@@ -498,64 +498,60 @@ li{margin-bottom:10px}
   font-style:italic;
   margin:0 0 30px;
 }
-.exp-layout{
-  --row-gap:22px;   /* space between stage rows */
-  --col-top:34px;   /* how far down each row the first timeline point sits */
-  max-width:1000px;
-  margin:0 auto 10px;
-  display:flex;flex-direction:column;
-  gap:var(--row-gap);
+.career-timeline{
+  margin:0 auto 44px;
+  max-width:900px;
+  overflow-x:auto;
+  padding-bottom:6px;
 }
-.exp-row{
-  display:grid;
-  grid-template-columns:300px 1fr;
-  column-gap:8px;
-  align-items:stretch;
-}
-.exp-timeline-col{
-  display:flex;flex-direction:column;
-  padding-top:var(--col-top);
-  opacity:0;transform:translateX(-14px);
-  transition:opacity .5s var(--ease), transform .5s var(--ease);
-}
-.experience.in-view .exp-timeline-col{opacity:1;transform:none}
-
-.timeline-node{
+.timeline-track{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
   position:relative;
-  display:flex;align-items:flex-start;gap:12px;
-  width:calc(100% + 6px);            /* lets the arrow reach the stage card */
-  padding:0 0 26px;
-  background:none;border:none;
-  text-align:left;font-family:inherit;
-  overflow:visible;
+  min-width:560px;
+  padding-top:8px;
 }
-.timeline-node:last-child{flex:1 1 auto}
-
-/* the vertical spine: each point draws the segment down to the next one
-   (the last point in a row runs on through the row gap to the next row) */
-.timeline-node::before{
+.timeline-track::before{
   content:'';
   position:absolute;
-  left:7px;top:8px;
-  width:2px;height:100%;
-  background:#C9DFCE;
+  top:16px;left:0;right:0;
+  height:2px;
+  background:#DCE7DF;
   z-index:0;
 }
-.timeline-node:last-child::before{height:calc(100% + var(--row-gap) + var(--col-top))}
-.exp-row:last-child .timeline-node:last-child::before{display:none}
-
+.timeline-node{
+  position:relative;
+  z-index:1;
+  display:flex;flex-direction:column;align-items:center;
+  flex:1;
+  text-align:center;
+  background:none;
+  border:none;
+  padding:0;
+  font-family:inherit;
+}
 .timeline-dot{
-  position:relative;z-index:1;
-  width:16px;height:16px;flex-shrink:0;
+  width:14px;height:14px;
   border-radius:50%;
   background:var(--surface);
   border:3px solid var(--green);
+  margin-bottom:12px;
   transition:transform .2s var(--ease), box-shadow .2s var(--ease);
 }
 .timeline-node:hover .timeline-dot{transform:scale(1.25);box-shadow:0 0 0 5px rgba(46,125,50,.15)}
+.timeline-node:hover .timeline-label strong{color:var(--green)}
 .timeline-node.is-active-target .timeline-dot{
   transform:scale(1.3);
   box-shadow:0 0 0 6px rgba(46,125,50,.22);
+}
+.timeline-label{display:flex;flex-direction:column;gap:2px;transition:transform .15s var(--ease)}
+.timeline-label strong{
+  font-family:var(--font-head);font-size:.85rem;color:var(--green-dark);
+  transition:color .2s var(--ease);
+}
+.timeline-label span{
+  font-size:.78rem;color:var(--text-muted);white-space:nowrap;
 }
 .timeline-node.is-ai-milestone .timeline-dot{
   border-color:var(--gold);
@@ -563,71 +559,39 @@ li{margin-bottom:10px}
   box-shadow:0 0 0 4px rgba(212,160,23,.2);
 }
 .timeline-node.is-ai-milestone:hover .timeline-dot{box-shadow:0 0 0 6px rgba(212,160,23,.28)}
-
-.timeline-label{
-  display:flex;flex-direction:column;gap:2px;
-  flex-shrink:0;max-width:170px;
-}
-.timeline-label strong{
-  font-family:var(--font-head);font-size:.85rem;line-height:1.3;
-  color:var(--green-dark);
-  transition:color .2s var(--ease);
-}
-.timeline-label > span:not(.timeline-badge){
-  font-size:.78rem;color:var(--text-muted);white-space:nowrap;
-}
-.timeline-node:hover .timeline-label strong{color:var(--green)}
 .timeline-badge{
-  align-self:flex-start;
-  margin-top:6px;
+  margin-top:8px;
   font-size:.7rem;font-weight:700;line-height:1.35;
   color:var(--green-deep);
   background:#EAF6EC;
   border:1px solid #cfe6d3;
   padding:4px 9px;
-  border-radius:12px;
+  border-radius:999px;
+  white-space:nowrap;
 }
 
-/* the arrow pointing across to the stage this point belongs to */
-.timeline-arrow{
-  position:relative;
-  flex:1 1 auto;
-  min-width:28px;
-  height:2px;
-  margin-top:7px;
-  align-self:flex-start;
-  background:linear-gradient(90deg, rgba(46,125,50,0), var(--green));
-  opacity:.6;
-  transition:opacity .2s var(--ease);
+/* ---------- Growth Journey — narrative stages, side by side ---------------- */
+.growth-journey{
+  display:flex;
+  align-items:stretch;
+  gap:22px;
+  max-width:1080px;
+  margin:0 auto 10px;
 }
-.timeline-arrow::after{
-  content:'';
-  position:absolute;
-  right:-1px;top:50%;
-  width:0;height:0;
-  border-left:9px solid var(--green);
-  border-top:5px solid transparent;
-  border-bottom:5px solid transparent;
-  transform:translateY(-50%);
-}
-.timeline-node.is-ai-milestone .timeline-arrow{background:linear-gradient(90deg, rgba(212,160,23,0), var(--gold))}
-.timeline-node.is-ai-milestone .timeline-arrow::after{border-left-color:var(--gold)}
-.timeline-node:hover .timeline-arrow,
-.timeline-node.is-active-target .timeline-arrow{opacity:1}
-
-/* ---------- Growth Journey — narrative stages, not a repeated job list ------ */
 .growth-stage{
+  flex:1;
+  min-width:0;
   background:var(--surface);
   border-radius:var(--radius);
   box-shadow:var(--shadow-sm);
-  padding:28px 32px;
+  padding:26px 24px;
   opacity:0;transform:translateY(16px);
   transition:opacity .5s var(--ease), transform .5s var(--ease), box-shadow .3s var(--ease);
 }
 .experience.in-view .growth-stage{opacity:1;transform:translateY(0)}
-.exp-row:nth-child(1) .growth-stage,.exp-row:nth-child(1) .exp-timeline-col{transition-delay:.05s}
-.exp-row:nth-child(2) .growth-stage,.exp-row:nth-child(2) .exp-timeline-col{transition-delay:.15s}
-.exp-row:nth-child(3) .growth-stage,.exp-row:nth-child(3) .exp-timeline-col{transition-delay:.25s}
+.growth-journey .growth-stage:nth-child(1){transition-delay:.05s}
+.growth-journey .growth-stage:nth-child(2){transition-delay:.15s}
+.growth-journey .growth-stage:nth-child(3){transition-delay:.25s}
 .growth-stage:hover{box-shadow:var(--shadow-md)}
 .growth-stage.is-ai-stage{border:1px solid #E8D28A}
 
@@ -639,14 +603,14 @@ li{margin-bottom:10px}
 }
 .growth-stage h3{
   font-family:var(--font-head);color:var(--green-dark);
-  font-size:1.25rem;margin-bottom:12px;
+  font-size:1.15rem;margin-bottom:12px;
 }
 .growth-stage p{
-  color:var(--text);font-size:.96rem;line-height:1.75;margin-bottom:16px;
+  color:var(--text);font-size:.92rem;line-height:1.7;margin-bottom:16px;
 }
 .growth-chips{display:flex;flex-wrap:wrap;gap:8px}
 .growth-chip{
-  font-family:var(--font-body);font-size:.8rem;font-weight:600;
+  font-family:var(--font-body);font-size:.78rem;font-weight:600;
   background:var(--bg);color:var(--green-deep);
   border:1px solid #cfe6d3;
   padding:6px 12px;border-radius:999px;
@@ -951,12 +915,9 @@ footer p{color:var(--text-muted);font-size:.92rem}
   .stat-card{flex:1 1 calc(50% - 18px)}
   .notebook{margin-left:16px;padding:36px 24px 46px 30px;transform:rotate(0)}
   .notebook::before{left:-14px;width:22px}
-  .exp-layout{--col-top:0px}
-  .exp-row{grid-template-columns:1fr;row-gap:12px}
-  .exp-timeline-col{padding-top:0}
-  .timeline-node{width:100%;padding-bottom:16px}
-  .timeline-arrow{display:none}
-  .timeline-node:last-child::before{display:none}
+  .career-timeline{overflow-x:auto}
+  .timeline-track{min-width:560px}
+  .growth-journey{flex-direction:column}
   .role-modal{max-width:100%;border-radius:0}
   .growth-stage{padding:22px 20px}
   .workflow-compare{flex-direction:column}
