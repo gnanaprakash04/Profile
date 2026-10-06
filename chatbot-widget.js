@@ -2,7 +2,7 @@
 // Talks to the Cloudflare Worker in chatbot/worker.js.
 (function () {
   // ---- EDIT THIS: your deployed Worker URL --------------------------
-  var WORKER_URL = 'https://portfolio-chatbot.YOUR-SUBDOMAIN.workers.dev';
+     var WORKER_URL = 'https://mute-dew-8908.gnanaprakash04.workers.dev';
   // ---------------------------------------------------------------------
 
   var GREETING = "Hi! I'm here to answer questions about Gnanaprakash's background, skills, and experience. What would you like to know?";
